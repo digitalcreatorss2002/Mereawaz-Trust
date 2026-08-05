@@ -1,21 +1,30 @@
-export const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'https://hrntechsolutions.com/mereawaz_backend'
+export const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || (
+  typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+    ? 'http://localhost/meriawaz-trust/mereawaz_backend'
+    : 'https://hrntechsolutions.com/mereawaz_backend'
+)
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL || (
-  typeof window !== 'undefined' && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1'
-    ? 'https://hrntechsolutions.com/mereawaz_backend/api'
-    : '/api'
+  typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+    ? '/api'
+    : 'https://hrntechsolutions.com/mereawaz_backend/api'
 )
 
 
 export function getImageUrl(path) {
   if (!path) return ''
-  if (typeof path === 'string' && (path.includes('localhost') || path.includes('127.0.0.1'))) {
-    path = path.replace(/^https?:\/\/[^\/]+(\/meriawaz-trust\/backend|\/mereawaz_backend|\/backend)?/i, '')
+  if (typeof path === 'string') {
+    if (path.includes('localhost') || path.includes('127.0.0.1')) {
+      path = path.replace(/^https?:\/\/[^\/]+(\/meriawaz-trust\/mereawaz_backend|\/meriawaz_trust\/backend|\/mereawaz_backend|\/backend)?/i, '')
+    }
   }
   if (path.startsWith('http://') || path.startsWith('https://')) return path
   if (path.startsWith('/uploads') || path.startsWith('uploads/')) {
     const cleanPath = path.startsWith('/') ? path : `/${path}`
     return `${BACKEND_URL}${cleanPath}`
+  }
+  if (path.startsWith('/')) {
+    return path
   }
   const cleanPath = path.startsWith('/') ? path : `/${path}`
   return `${BACKEND_URL}${cleanPath}`

@@ -7,12 +7,12 @@ export default defineConfig({
     port: 5173,
     proxy: {
       '/api': {
-        target: 'https://hrntechsolutions.com/mereawaz_backend/',
+        target: 'http://localhost/meriawaz-trust/mereawaz_backend/',
         changeOrigin: true,
         secure: false
       },
       '/uploads': {
-        target: 'https://hrntechsolutions.com/mereawaz_backend/',
+        target: 'http://localhost/meriawaz-trust/mereawaz_backend/',
         changeOrigin: true,
         secure: false
       }

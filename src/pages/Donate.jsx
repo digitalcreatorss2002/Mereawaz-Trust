@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { api } from '../api.js'
 import PageHeader from '../components/PageHeader.jsx'
 import { FaHeart, FaShieldAlt, FaCheckCircle, FaQrcode, FaLock } from 'react-icons/fa'
@@ -6,8 +7,27 @@ import { FaHeart, FaShieldAlt, FaCheckCircle, FaQrcode, FaLock } from 'react-ico
 const PRESET_AMOUNTS = [500, 1000, 2500, 5000]
 
 export default function Donate() {
+  const [searchParams] = useSearchParams()
+  const initialAmount = searchParams.get('amount') ? Number(searchParams.get('amount')) : 1000
+
   const [step, setStep] = useState('form') // form -> pay -> done
-  const [form, setForm] = useState({ name: '', email: '', phone: '', amount: 1000, note: '', requires_80g: false, pan_number: '' })
+  const [form, setForm] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    amount: initialAmount || 1000,
+    note: '',
+    requires_80g: false,
+    pan_number: ''
+  })
+
+  useEffect(() => {
+    const amtParam = searchParams.get('amount')
+    if (amtParam && !isNaN(amtParam) && Number(amtParam) > 0) {
+      setForm((f) => ({ ...f, amount: Number(amtParam) }))
+    }
+  }, [searchParams])
+
   const [donation, setDonation] = useState(null)
   const [utr, setUtr] = useState('')
   const [error, setError] = useState('')
@@ -20,11 +40,22 @@ export default function Donate() {
     setBusy(true)
     setError('')
     try {
-      const res = await api.post('/donate/create.php', form)
-      setDonation(res.data)
-      setStep('pay')
+      const payload = {
+        ...form,
+        amount: Number(form.amount)
+      }
+      const res = await api.post('/donate/create.php', payload)
+      if (res?.data) {
+        setDonation(res.data)
+        setStep('pay')
+        if (typeof window !== 'undefined') {
+          window.scrollTo({ top: 250, behavior: 'smooth' })
+        }
+      } else {
+        throw new Error(res?.message || 'Failed to create donation reference.')
+      }
     } catch (err) {
-      setError(err.message)
+      setError(err.message || 'Something went wrong. Please check your connection and try again.')
     } finally {
       setBusy(false)
     }

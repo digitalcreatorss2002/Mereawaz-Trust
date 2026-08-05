@@ -53,7 +53,7 @@ export default function AutoSlider({ children, interval = 3500 }) {
 
       {/* Navigation Controls */}
       {totalItems > 1 && (
-        <div className="mt-6 flex items-center justify-between">
+        <div className="mt-6 flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-4">
           <div className="flex gap-2">
             <button
               onClick={prevSlide}

@@ -22,34 +22,32 @@ export default function AboutSection({ isAboutPage = false }) {
                 />
               </div>
 
-              {/* 1. BIG LEFT CAPSULE IMAGE (With Light Hover Overlay & Scale Effect) */}
-              <div className="group/img1 w-[250px] sm:w-[360px] h-[370px] sm:h-[540px] rounded-tl-[1000px] rounded-tr-[1000px] rounded-br-[1000px] rounded-bl-[1000px] overflow-hidden absolute top-0 left-0 z-10 bg-gray-200 shadow-md transition-all duration-500 hover:shadow-xl hover:-translate-y-1 cursor-pointer">
+              {/* 1. BIG LEFT CAPSULE IMAGE */}
+              <div className="group/img1 w-[200px] xs:w-[230px] sm:w-[360px] h-[320px] xs:h-[360px] sm:h-[540px] rounded-tl-[1000px] rounded-tr-[1000px] rounded-br-[1000px] rounded-bl-[1000px] overflow-hidden absolute top-0 left-0 z-10 bg-gray-200 shadow-md transition-all duration-500 hover:shadow-xl cursor-pointer">
                 <img
                   src="/about-banner.jpg"
                   alt="NGO Protesters"
                   className="w-full h-full object-cover scale-105 transition-transform duration-700 ease-out group-hover/img1:scale-110 group-hover/img1:brightness-105"
                 />
-                {/* Light white shine overlay on hover */}
                 <div className="absolute inset-0 bg-white/0 group-hover/img1:bg-white/10 transition-colors duration-500 pointer-events-none" />
               </div>
 
-              {/* 2. SMALL CAPSULE IMAGE (With Light Hover Overlay & Scale Effect) */}
-              <div className="group/img2 w-[210px] sm:w-[330px] h-[290px] sm:h-[500px] rounded-tl-[1000px] rounded-tr-[1000px] rounded-br-[1000px] rounded-bl-[1000px] overflow-hidden absolute top-[180px] bottom-2 left-[150px] sm:left-[250px] z-20 bg-gray-200 border-[6px] border-[var(--text-color-light)] shadow-xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-1 cursor-pointer">
+              {/* 2. SMALL CAPSULE IMAGE */}
+              <div className="group/img2 w-[170px] xs:w-[190px] sm:w-[330px] h-[250px] xs:h-[280px] sm:h-[500px] rounded-tl-[1000px] rounded-tr-[1000px] rounded-br-[1000px] rounded-bl-[1000px] overflow-hidden absolute top-[150px] sm:top-[180px] bottom-2 left-[90px] xs:left-[110px] sm:left-[250px] z-20 bg-gray-200 border-[4px] sm:border-[6px] border-[var(--text-color-light)] shadow-xl transition-all duration-500 hover:shadow-2xl cursor-pointer">
                 <img
                   src="/hero-banner.jpg"
                   alt="Ethnicities United"
                   className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover/img2:scale-110 group-hover/img2:brightness-105"
                 />
-                {/* Light white shine overlay on hover */}
                 <div className="absolute inset-0 bg-white/0 group-hover/img2:bg-white/10 transition-colors duration-500 pointer-events-none" />
               </div>
 
-              {/* 3. YELLOW OVERLAY CARD (Overlapping both images) */}
-              <div className="absolute bottom-8 left-[120px] sm:left-[170px] z-30 rounded-2xl bg-[var(--accent-gold)] p-3.5 sm:p-4 text-[var(--text-color)] shadow-xl text-center w-36 sm:w-40 border-[6px] border-[var(--text-color-light)] transition-transform duration-300 hover:scale-105">
-                <span className="font-extrabold text-3xl sm:text-4xl block leading-none tracking-tight">
+              {/* 3. YELLOW OVERLAY CARD */}
+              <div className="absolute bottom-6 left-[60px] xs:left-[80px] sm:left-[170px] z-30 rounded-2xl bg-[var(--accent-gold)] p-3 sm:p-4 text-[var(--text-color)] shadow-xl text-center w-32 sm:w-40 border-[4px] sm:border-[6px] border-[var(--text-color-light)] transition-transform duration-300 hover:scale-105">
+                <span className="font-extrabold text-2xl sm:text-4xl block leading-none tracking-tight">
                   25+
                 </span>
-                <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wide block mt-1.5 leading-snug">
+                <span className="text-[9px] sm:text-[11px] font-bold uppercase tracking-wide block mt-1 leading-snug">
                   Years Of <br /> Experience
                 </span>
               </div>

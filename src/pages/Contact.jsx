@@ -203,8 +203,16 @@ export default function Contact() {
         </div>
       </section>
 
-      <section id="volunteer" className="bg-white py-16 border-t border-gray-200">
+      <section id="testimonial" className="bg-white py-16 border-t border-gray-200">
         <div className="container-page max-w-3xl">
+          <div className="text-center mb-8">
+            <span className="inline-block rounded-full bg-[var(--secondary-light)] px-3.5 py-1 text-xs font-extrabold uppercase tracking-widest text-[var(--button-bg-color)] mb-2">
+              COMMUNITY FEEDBACK
+            </span>
+            <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-gray-900">
+              Share Your Story &amp; Experience
+            </h2>
+          </div>
           <TestimonialForm />
         </div>
       </section>

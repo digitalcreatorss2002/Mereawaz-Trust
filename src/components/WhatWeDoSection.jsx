@@ -37,7 +37,7 @@ export default function WhatWeDoSection() {
             <div className="relative w-full max-w-[480px] h-[450px] sm:h-[500px] mx-auto lg:mx-0">
               
               {/* 1. BACK / TOP IMAGE */}
-              <div className="absolute top-0 left-0 z-10 w-[260px] sm:w-[443px] h-[300px] sm:h-[500px] rounded-2xl overflow-hidden shadow-lg border-2 border-[#13493a]">
+              <div className="absolute top-0 left-0 z-10 w-[200px] xs:w-[240px] sm:w-[443px] h-[250px] xs:h-[290px] sm:h-[500px] rounded-2xl overflow-hidden shadow-lg border-2 border-[#13493a]">
                 <img
                   src="/about-banner.jpg"
                   alt="Community Action"
@@ -45,8 +45,8 @@ export default function WhatWeDoSection() {
                 />
               </div>
 
-              {/* 2. FRONT OVERLAPPING IMAGE (Shifted Bottom-Right) */}
-              <div className="absolute top-[100px] sm:top-[150px] left-[100px] sm:left-[250px] right-0 z-20 w-[240px] sm:w-[332px] h-[300px] sm:h-[428px] rounded-2xl overflow-hidden shadow-2xl border-4 border-[#0F382C]">
+              {/* 2. FRONT OVERLAPPING IMAGE */}
+              <div className="absolute top-[80px] sm:top-[150px] left-[70px] xs:left-[90px] sm:left-[250px] z-20 w-[190px] xs:w-[220px] sm:w-[332px] h-[240px] xs:h-[280px] sm:h-[428px] rounded-2xl overflow-hidden shadow-2xl border-4 border-[#0F382C]">
                 <img
                   src="/vision.jpg"
                   alt="Volunteer Action"

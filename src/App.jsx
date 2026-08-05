@@ -12,6 +12,7 @@ import Gallery from './pages/Gallery.jsx'
 import Blog from './pages/Blog.jsx'
 import BlogDetail from './pages/BlogDetail.jsx'
 import Contact from './pages/Contact.jsx'
+import Volunteer from './pages/Volunteer.jsx'
 import Donate from './pages/Donate.jsx'
 import NotFound from './pages/NotFound.jsx'
 
@@ -19,11 +20,11 @@ import Preloader from './components/Preloader.jsx'
 
 export default function App() {
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col w-full max-w-full overflow-x-hidden">
       <Preloader />
       <ScrollToTop />
       <Navbar />
-      <main className="flex-1">
+      <main className="flex-1 w-full max-w-full overflow-x-hidden">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
@@ -33,7 +34,7 @@ export default function App() {
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogDetail />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/volunteer" element={<Contact />} />
+          <Route path="/volunteer" element={<Volunteer />} />
           <Route path="/donate" element={<Donate />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

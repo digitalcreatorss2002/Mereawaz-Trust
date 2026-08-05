@@ -16,16 +16,25 @@
   --dark-ngo: #1B2316;
 }
 
-html {
+html, body {
   scroll-behavior: smooth;
   font-family: 'Inter', sans-serif;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  position: relative;
+}
+
+#root {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 body {
   background-color: #FAF8F4;
   color: var(--text-color);
   @apply font-body antialiased selection:bg-[var(--primary-color)] selection:text-black;
-  overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {

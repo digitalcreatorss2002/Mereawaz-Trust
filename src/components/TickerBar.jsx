@@ -13,22 +13,22 @@ export default function TickerBar() {
   const repeatedItems = [...items, ...items, ...items, ...items];
 
   return (
-    /* Outer wrapper: -my-8 / -my-12 se ye dono sections par naturally overlap karega bina cut huye */
-    <div className="relative z-30 -my-8 sm:-my-7 w-full overflow-visible leading-none pointer-events-none">
+    /* Outer wrapper: Full z-index overlap for both top and bottom sections */
+    <div className="relative z-40 w-full overflow-visible leading-none pointer-events-none -my-6 sm:-my-8">
       
       {/* 
-        Reference image jaisa exact slant:
-        -rotate-2 (Left Down, Right Up)
-        w-[110vw] & -ml-[5vw] taaki side me koi gap na bache
+        Slanted Edge-to-Edge Yellow Ribbon 
+        - w-[110vw] and -ml-[5vw] ensures full edge bleed without cutting off
+        - rotate-[-2deg] creates exact reference slant
       */}
-      <div className="w-[110vw] -ml-[5vw] bg-[var(--accent-gold,#F7D046)] border-y-2 border-[#e5bf3b] py-3.5 sm:py-5 shadow-2xl flex items-center overflow-hidden transform -rotate-2 sm:-rotate-2.5 origin-center transform-gpu pointer-events-auto">
+      <div className="w-[110vw] -ml-[5vw] bg-[#F7D046] border-y-2 border-[#e5bf3b] py-3.5 sm:py-4 shadow-2xl flex items-center transform -rotate-2 sm:-rotate-2.5 origin-center transform-gpu pointer-events-auto">
         
         {/* Infinite Scrolling Track */}
         <div className="flex whitespace-nowrap animate-marquee">
           {repeatedItems.map((text, idx) => (
             <div
               key={idx}
-              className="flex items-center mx-6 text-[18px] sm:text-[20px] md:text-[22px] font-extrabold uppercase tracking-wider shrink-0 text-[var(--text-color,#0F382C)]"
+              className="flex items-center mx-6 text-[18px] sm:text-[20px] md:text-[22px] font-extrabold uppercase tracking-wider shrink-0 text-[#0F382C]"
             >
               <span>{text}</span>
               
@@ -53,7 +53,7 @@ export default function TickerBar() {
         .animate-marquee {
           display: flex;
           width: max-content;
-          animation: marquee 50s linear infinite;
+          animation: marquee 60s linear infinite;
         }
       `}</style>
     </div>
