@@ -39,6 +39,12 @@ export default function HeroSlider() {
 
   const slide = slides[current] || DEFAULT_SLIDES[0];
 
+  const title = slide?.title || slide?.caption || "Empowering Communities & Building Stronger Futures";
+  const subtitle = slide?.subtitle || "MERI AWAZ TRUST";
+  const description = slide?.description || "Creating sustainable change through education, healthcare, and social development across India.";
+  const buttonText = slide?.button_text || "Discover Our Work";
+  const buttonLink = slide?.button_link || "/about";
+
   return (
     <section className="relative w-full h-[520px] sm:h-[600px] lg:h-[680px] bg-slate-900 overflow-hidden font-sans">
       {/* Background Slide Image */}
@@ -54,27 +60,27 @@ export default function HeroSlider() {
       {/* Content Container */}
       <div className="relative z-10 container-page h-full flex flex-col justify-center text-white">
         <div className="max-w-2xl space-y-5 animate-fadeIn">
-          {slide.subtitle && (
+          {subtitle && (
             <span className="inline-flex items-center gap-2 rounded-full bg-[var(--button-bg-color)] px-4 py-1.5 text-xs font-bold text-white tracking-wider uppercase shadow-md">
               <span className="h-2 w-2 rounded-full bg-[var(--accent-gold)] inline-block animate-ping" />
-              {slide.subtitle}
+              {subtitle}
             </span>
           )}
 
           <h1 className="font-display text-3xl sm:text-5xl lg:text-6xl font-black leading-tight tracking-tight text-white">
-            {slide.title}
+            {title}
           </h1>
 
           <p className="text-sm sm:text-base lg:text-lg text-gray-200 leading-relaxed font-normal">
-            {slide.description}
+            {description}
           </p>
 
           <div className="pt-4 flex flex-wrap gap-4 items-center">
             <Link
-              to={slide.button_link || "/about"}
+              to={buttonLink}
               className="inline-flex items-center gap-2 rounded-xl bg-[var(--button-bg-color)] hover:bg-[var(--button-hover-color)] px-7 py-3.5 text-sm font-extrabold text-white shadow-lg transition-all duration-300 hover:scale-105"
             >
-              <span>{slide.button_text || "Discover Our Work"}</span>
+              <span>{buttonText}</span>
               <FiArrowRight className="text-base" />
             </Link>
 

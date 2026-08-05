@@ -1,6 +1,10 @@
-const BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api'
-
 export const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'https://hrntechsolutions.com/mereawaz_backend'
+
+const BASE_URL = import.meta.env.VITE_API_BASE_URL || (
+  typeof window !== 'undefined' && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1'
+    ? 'https://hrntechsolutions.com/mereawaz_backend/api'
+    : '/api'
+)
 
 
 export function getImageUrl(path) {
