@@ -42,7 +42,7 @@ export default function PropertiesSection({
     return (
       <div
         key={p.id || p.slug || Math.random()}
-        className="group relative h-full min-h-[380px] sm:min-h-[420px] w-full rounded-3xl bg-[#13382C] p-6 sm:p-8 border border-amber-200/30 shadow-xl transition-all duration-500 overflow-hidden flex flex-col justify-between cursor-pointer hover:shadow-2xl hover:-translate-y-2"
+        className="group relative h-full min-h-[380px] sm:min-h-[420px] w-full rounded-3xl bg-[#13382C] p-6 sm:p-8 border border-amber-200/30 shadow-xl transition-all duration-500 overflow-hidden flex flex-col justify-between cursor-pointer hover:shadow-2xl hover:-translate-y-2 animate-fade-up"
       >
         {/* 1. BACKGROUND IMAGE (Reveals on Hover) */}
         {imgSrc && (

@@ -11,7 +11,7 @@ export default function AboutSection({ isAboutPage = false }) {
       <div className="container-page">
         <div className="grid gap-10 lg:grid-cols-12 lg:items-center">
           {/* ================= LEFT COLUMN: OVERLAPPING CAPSULES ================= */}
-          <div className="lg:col-span-6 relative">
+          <div className="lg:col-span-6 relative animate-fade-right">
             <div className="relative mx-auto max-w-md lg:max-w-none h-[480px] sm:h-[650px] flex items-center justify-center">
               {/* Background Hands/Hearts PNG Illustration (abouthand.png) */}
               <div className="absolute top-0 right-[10%] sm:right-[10%] z-0 pointer-events-none opacity-40 sm:opacity-50">
@@ -57,7 +57,7 @@ export default function AboutSection({ isAboutPage = false }) {
           </div>
 
           {/* ================= RIGHT COLUMN: TEXT & CONTENT ================= */}
-          <div className="lg:col-span-6 space-y-6 lg:pl-2">
+          <div className="lg:col-span-6 space-y-6 lg:pl-2 animate-fade-left">
             {/* Pill Eyebrow Badge */}
             <div className="inline-flex items-center gap-2 rounded-full border border-gray-300/60 bg-[var(--button-bg-color)] px-3.5 py-1 text-xs font-semibold text-[var(--text-color-light)]">
               <span className="h-2 w-2 rounded-full bg-[var(--accent-gold)] inline-block" />

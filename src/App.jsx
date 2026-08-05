@@ -15,9 +15,12 @@ import Contact from './pages/Contact.jsx'
 import Donate from './pages/Donate.jsx'
 import NotFound from './pages/NotFound.jsx'
 
+import Preloader from './components/Preloader.jsx'
+
 export default function App() {
   return (
     <div className="flex min-h-screen flex-col">
+      <Preloader />
       <ScrollToTop />
       <Navbar />
       <main className="flex-1">

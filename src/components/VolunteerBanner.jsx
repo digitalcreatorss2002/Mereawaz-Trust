@@ -21,7 +21,7 @@ export default function VolunteerBanner() {
       <div className="container-page">
         <div className="grid lg:grid-cols-12 items-center min-h-[620px] gap-8">
           {/* ================= RIGHT COLUMN: CONTENT & BULLET POINTS ================= */}
-          <div className="lg:col-span-6 p-4 sm:p-6 lg:p-8 flex flex-col justify-center space-y-6">
+          <div className="lg:col-span-6 p-4 sm:p-6 lg:p-8 flex flex-col justify-center space-y-6 animate-fade-right">
             
             {/* Pill Eyebrow Badge */}
             <div>
@@ -83,7 +83,7 @@ export default function VolunteerBanner() {
 
           </div>
           {/* ================= LEFT COLUMN: DONATION FORM (Now expands to full outer size) ================= */}
-          <div className="lg:col-span-6 w-full flex items-center justify-center">
+          <div className="lg:col-span-6 w-full flex items-center justify-center animate-fade-left">
             {/* Donation Form Box expands to fill the outer card dimensions */}
             <div className="w-full bg-[var(--button-bg-color)] rounded-[32px] p-8 sm:p-10 lg:p-12 shadow-2xl border border-gray-100/80">
               <h3 className="font-display text-xl sm:text-2xl font-bold text-center text-[var(--text-color-light)] mb-3">

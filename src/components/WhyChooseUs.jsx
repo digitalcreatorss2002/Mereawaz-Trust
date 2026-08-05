@@ -23,7 +23,7 @@ export default function WhyChooseUs() {
       <div className="container-page">
         <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
           {/* Left Column Content */}
-          <div className="lg:col-span-6 space-y-8">
+          <div className="lg:col-span-6 space-y-8 animate-fade-right">
             <div className="space-y-4">
               <div className="inline-flex items-center gap-2 rounded-full border border-[var(--accent-gold)] bg-[var(--button-bg-color)] px-4 py-1.5 text-sm font-extrabold tracking-wider text-[var(--text-color-light)]">
                 <span className="h-2 w-2 rounded-full bg-[var(--accent-gold)] inline-block animate-pulse"></span>
@@ -72,7 +72,7 @@ export default function WhyChooseUs() {
           </div>
 
           {/* Right Column Images Composition (5th Image Design) */}
-          <div className="lg:col-span-6 relative">
+          <div className="lg:col-span-6 relative animate-fade-left">
             <div className="relative mx-auto max-w-md lg:max-w-none">
               {/* Main Tall Image */}
               <div className="overflow-hidden rounded-3xl shadow-aasha-lg border-4 border-white bg-[var(--primary-color)] sm:w-[540px] h-[400px] sm:h-[550px]">
