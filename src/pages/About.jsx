@@ -4,6 +4,7 @@ import { FaSeedling, FaSun, FaGraduationCap, FaHospital } from "react-icons/fa";
 import PageHeader from "../components/PageHeader.jsx";
 import AboutSection from "../components/AboutSection.jsx";
 import WhyChooseUs from "../components/WhyChooseUs.jsx";
+import BoardOfTrustees from "../components/BoardOfTrustees.jsx";
 import FaqSection from "../components/FaqSection.jsx";
 import { api, getImageUrl } from "../api.js";
 import TickerBar from "../components/TickerBar.jsx";
@@ -59,6 +60,9 @@ export default function About() {
 
       {/* 2. WHY CHOOSE US SECTION (5TH IMAGE DESIGN) */}
       <WhyChooseUs />
+
+      {/* 3. BOARD OF TRUSTEES SECTION */}
+      <BoardOfTrustees />
 
       {/* 3. MISSION & VISION SECTION */}
       <section className="py-20 bg-[#FAF8F4] border-t border-b border-gray-200">

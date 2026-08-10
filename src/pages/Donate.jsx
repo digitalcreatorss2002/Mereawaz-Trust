@@ -95,15 +95,15 @@ export default function Donate() {
               {/* Header Badges */}
               <div className="flex items-center justify-between border-b border-gray-100 pb-6 mb-6">
                 <div>
-                  <span className="inline-block rounded-full bg-[var(--secondary-light)] px-3 py-1 text-xs font-bold uppercase tracking-widest text-[var(--button-bg-color)] mb-1">
+                  {/* <span className="inline-block rounded-full bg-[var(--secondary-light)] px-3 py-1 text-xs font-bold uppercase tracking-widest text-[var(--button-bg-color)] mb-1">
                     TRANSPARENT DONATION
-                  </span>
+                  </span> */}
                   <h2 className="font-display text-2xl font-extrabold text-gray-900">Enter Donation Amount</h2>
                 </div>
-                <div className="flex items-center gap-1.5 text-xs font-bold text-gray-500 bg-gray-50 px-3 py-1.5 rounded-full border">
+                {/* <div className="flex items-center gap-1.5 text-xs font-bold text-gray-500 bg-gray-50 px-3 py-1.5 rounded-full border">
                   <FaLock className="text-green-600" />
                   <span>256-bit Secure</span>
-                </div>
+                </div> */}
               </div>
 
               <form onSubmit={handleCreate} className="space-y-6">
@@ -118,11 +118,10 @@ export default function Donate() {
                         type="button"
                         key={a}
                         onClick={() => setForm((f) => ({ ...f, amount: a }))}
-                        className={`rounded-2xl border-2 py-3 text-sm font-bold transition-all duration-300 ${
-                          Number(form.amount) === a
-                            ? 'border-[var(--button-bg-color)] bg-[var(--button-bg-color)] text-white shadow-md'
-                            : 'border-gray-200 bg-white text-gray-700 hover:border-gray-300'
-                        }`}
+                        className={`rounded-2xl border-2 py-3 text-sm font-bold transition-all duration-300 ${Number(form.amount) === a
+                          ? 'border-[var(--button-bg-color)] bg-[var(--button-bg-color)] text-white shadow-md'
+                          : 'border-gray-200 bg-white text-gray-700 hover:border-gray-300'
+                          }`}
                       >
                         ₹{a}
                       </button>
