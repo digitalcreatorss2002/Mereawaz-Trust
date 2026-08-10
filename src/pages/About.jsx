@@ -40,7 +40,7 @@ export default function About() {
       .then((res) => {
         setMissionData(res?.data || null);
       })
-      .catch(() => {});
+      .catch(() => { });
   }, []);
 
   return (
@@ -52,7 +52,7 @@ export default function About() {
         bgImage="/about-banner.jpg"
       />
 
-      <TickerBar />
+      {/* <TickerBar /> */}
 
       {/* 1. ABOUT US SECTION (2ND IMAGE DESIGN - "Contact Us ↗") */}
       <AboutSection isAboutPage={true} />

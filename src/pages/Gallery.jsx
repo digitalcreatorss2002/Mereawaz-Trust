@@ -30,7 +30,7 @@ export default function Gallery() {
         subtitle="Visual stories from our rural programs, health camps, drone farming labs, and community events."
         bgImage="/about-banner.jpg"
       />
-      <TickerBar/>
+      {/* <TickerBar/> */}
 
       <section className="py-20 pt-28 bg-[var(--text-color-light)]">
         <div className="container-page">

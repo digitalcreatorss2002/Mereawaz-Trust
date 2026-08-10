@@ -22,7 +22,7 @@ export default function VolunteerBanner() {
         <div className="grid lg:grid-cols-12 items-center min-h-[620px] gap-8">
           {/* ================= RIGHT COLUMN: CONTENT & BULLET POINTS ================= */}
           <div className="lg:col-span-6 p-4 sm:p-6 lg:p-8 flex flex-col justify-center space-y-6 animate-fade-right">
-            
+
             {/* Pill Eyebrow Badge */}
             <div>
               <span className="inline-flex items-center gap-2 rounded-full border border-[var(--accent-gold)] bg-[var(--button-bg-color)] px-4 py-1 text-xs font-bold text-[var(--text-color-light)]">
@@ -89,7 +89,7 @@ export default function VolunteerBanner() {
               <h3 className="font-display text-xl sm:text-2xl font-bold text-center text-[var(--text-color-light)] mb-3">
                 How much would you like to donate today?
               </h3>
-              
+
               <div className="w-16 h-1 bg-[var(--text-color-light)] mb-4 rounded-full mx-auto" />
 
               <p className="text-xs sm:text-sm text-[var(--text-color-light)] text-center mb-8 leading-relaxed max-w-md mx-auto">
@@ -114,11 +114,10 @@ export default function VolunteerBanner() {
                           setSelectedAmount(amt);
                           setCustomAmount("");
                         }}
-                        className={`py-3 px-3 rounded-2xl text-xs sm:text-sm font-black transition-all border ${
-                          isSelected
-                            ? "bg-[var(--button-bg-color)] text-[var(--text-color-light)] border-[var(--text-color-light)] shadow-sm"
-                            : "bg-gray-50 text-gray-800 border-gray-200 hover:bg-gray-100"
-                        }`}
+                        className={`py-3 px-3 rounded-2xl text-xs sm:text-sm font-black transition-all border ${isSelected
+                          ? "bg-gray-50 text-gray-800 border-gray-200 hover:bg-gray-100"
+                          : "   bg-[var(--button-bg-color)] text-[var(--text-color-light)] border-[var(--text-color-light)] shadow-sm"
+                          }`}
                       >
                         ₹{amt}
                       </button>
@@ -156,7 +155,7 @@ export default function VolunteerBanner() {
             </div>
           </div>
 
-          
+
 
         </div>
       </div>
