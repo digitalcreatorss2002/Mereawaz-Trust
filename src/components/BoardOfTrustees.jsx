@@ -74,7 +74,7 @@ export default function BoardOfTrustees() {
             </div>
 
             <h2 className="font-display text-3xl font-extrabold sm:text-4xl text-gray-900 tracking-tight">
-              Board of Trustees
+              Board of Members
             </h2>
 
             <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
@@ -133,7 +133,7 @@ export default function BoardOfTrustees() {
               className="inline-flex items-center gap-3 rounded-2xl bg-[var(--button-bg-color)] hover:bg-[#1a3831] px-8 py-4 text-sm sm:text-base font-bold text-white shadow-xl transition-all duration-300 hover:scale-105 active:scale-95"
             >
               <FaUserTie className="text-[var(--accent-gold)] text-lg" />
-              <span>View All Board of Trustees ({displayList.length} Members)</span>
+              <span>View All Board of Members ({displayList.length} Members)</span>
               <FiArrowUpRight className="text-lg font-bold" />
             </button>
           </div>
@@ -159,7 +159,7 @@ export default function BoardOfTrustees() {
                     BOARD & ADVISORY TEAM
                   </span>
                   <h3 className="font-display text-2xl sm:text-3xl font-extrabold text-gray-900">
-                    Board of Trustees
+                    Board of Members
                   </h3>
                 </div>
 
@@ -214,7 +214,7 @@ export default function BoardOfTrustees() {
 
               {/* Modal Footer */}
               <div className="bg-white border-t border-gray-100 p-4 sm:p-6 text-center text-xs text-gray-500 font-semibold flex items-center justify-between">
-                <span>Showing total {displayList.length} Trustee Members</span>
+                <span>Showing total {displayList.length} Board Members</span>
                 <button
                   type="button"
                   onClick={() => setShowModal(false)}
