@@ -18,6 +18,8 @@ const DEFAULT_SLIDES = [
 export default function HeroSlider() {
   const [slides, setSlides] = useState(DEFAULT_SLIDES);
   const [current, setCurrent] = useState(0);
+  const [procurements, setProcurements] = useState([]);
+  const [procurementLoaded, setProcurementLoaded] = useState(false);
 
   useEffect(() => {
     api.get("/hero.php")
@@ -27,6 +29,17 @@ export default function HeroSlider() {
         }
       })
       .catch(() => {});
+
+    api.get("/procurement.php")
+      .then((res) => {
+        if (res?.data && Array.isArray(res.data)) {
+          setProcurements(res.data);
+        }
+        setProcurementLoaded(true);
+      })
+      .catch(() => {
+        setProcurementLoaded(true);
+      });
   }, []);
 
   useEffect(() => {
@@ -45,8 +58,27 @@ export default function HeroSlider() {
   const buttonText = slide?.button_text || "Discover Our Work";
   const buttonLink = slide?.button_link || "/about";
 
+  const handleProcurementClick = (e, linkUrl) => {
+    if (!linkUrl) {
+      linkUrl = "/volunteer#volunteer-form";
+    }
+    
+    // Check if target is on current page
+    if (linkUrl.includes("#volunteer-form")) {
+      const formEl = document.getElementById("volunteer-form");
+      if (formEl) {
+        e.preventDefault();
+        formEl.scrollIntoView({ behavior: "smooth", block: "center" });
+        return;
+      }
+    }
+    
+    // Default navigation
+    window.location.href = linkUrl;
+  };
+
   return (
-    <section className="relative w-full h-[520px] sm:h-[600px] lg:h-[680px] bg-slate-900 overflow-hidden font-sans">
+    <section className="relative w-full min-h-[580px] sm:min-h-[640px] lg:h-[700px] bg-slate-900 overflow-hidden font-sans flex items-center">
       {/* Background Slide Image */}
       <div
         className="absolute inset-0 bg-cover bg-center transition-all duration-1000 transform scale-105"
@@ -54,49 +86,128 @@ export default function HeroSlider() {
           backgroundImage: `url(${getImageUrl(slide.image_url) || "/hero-banner.jpg"})`,
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/75 to-black/40" />
       </div>
 
       {/* Content Container */}
-      <div className="relative z-10 container-page h-full flex flex-col justify-center text-white">
-        <div className="max-w-2xl space-y-5 animate-fadeIn">
-          {subtitle && (
-            <span className="inline-flex items-center gap-2 rounded-full bg-[var(--button-bg-color)] px-4 py-1.5 text-xs font-bold text-white tracking-wider uppercase shadow-md">
-              <span className="h-2 w-2 rounded-full bg-[var(--accent-gold)] inline-block animate-ping" />
-              {subtitle}
-            </span>
-          )}
+      <div className="relative z-10 container-page w-full py-12 sm:py-16 lg:py-0 text-white">
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+          
+          {/* LEFT COLUMN: HERO TEXT CONTENT */}
+          <div className="lg:col-span-7 space-y-5 animate-fadeIn">
+            {subtitle && (
+              <span className="inline-flex items-center gap-2 rounded-full bg-[var(--button-bg-color)] px-4 py-1.5 text-xs font-bold text-white tracking-wider uppercase shadow-md">
+                <span className="h-2 w-2 rounded-full bg-[var(--accent-gold)] inline-block animate-ping" />
+                {subtitle}
+              </span>
+            )}
 
-          <h1 className="font-display text-3xl sm:text-5xl lg:text-6xl font-black leading-tight tracking-tight text-white">
-            {title}
-          </h1>
+            <h1 className="font-display text-3xl sm:text-5xl lg:text-6xl font-black leading-tight tracking-tight text-white">
+              {title}
+            </h1>
 
-          <p className="text-sm sm:text-base lg:text-lg text-gray-200 leading-relaxed font-normal">
-            {description}
-          </p>
+            <p className="text-sm sm:text-base lg:text-lg text-gray-200 leading-relaxed font-normal max-w-xl">
+              {description}
+            </p>
 
-          <div className="pt-4 flex flex-wrap gap-4 items-center">
-            <Link
-              to={buttonLink}
-              className="inline-flex items-center gap-2 rounded-xl bg-[var(--button-bg-color)] hover:bg-[var(--button-hover-color)] px-7 py-3.5 text-sm font-extrabold text-white shadow-lg transition-all duration-300 hover:scale-105"
-            >
-              <span>{buttonText}</span>
-              <FiArrowRight className="text-base" />
-            </Link>
+            <div className="pt-2 flex flex-wrap gap-4 items-center">
+              <Link
+                to={buttonLink}
+                className="inline-flex items-center gap-2 rounded-xl bg-[var(--button-bg-color)] hover:bg-[var(--button-hover-color)] px-7 py-3.5 text-sm font-extrabold text-white shadow-lg transition-all duration-300 hover:scale-105"
+              >
+                <span>{buttonText}</span>
+                <FiArrowRight className="text-base" />
+              </Link>
 
-            <Link
-              to="/donate"
-              className="inline-flex items-center gap-2 rounded-xl bg-white/10 backdrop-blur-md hover:bg-white/20 px-7 py-3.5 text-sm font-extrabold text-white border border-white/30 transition-all duration-300 hover:scale-105"
-            >
-              <span>Donate Now</span>
-            </Link>
+              <Link
+                to="/donate"
+                className="inline-flex items-center gap-2 rounded-xl bg-white/10 backdrop-blur-md hover:bg-white/20 px-7 py-3.5 text-sm font-extrabold text-white border border-white/30 transition-all duration-300 hover:scale-105"
+              >
+                <span>Donate Now</span>
+              </Link>
+            </div>
           </div>
+
+          {/* RIGHT COLUMN: OPEN PROCUREMENT (EOI/RFQ) CARD WIDGET */}
+          <div className="lg:col-span-5 flex justify-center lg:justify-end animate-fadeIn">
+            <div className="w-full max-w-md bg-[#0d1612]/90 backdrop-blur-lg border border-emerald-800/40 rounded-3xl p-5 sm:p-6 shadow-2xl space-y-4 text-left">
+              
+              {/* Card Header matching Image 1 */}
+              <div className="flex items-center gap-3 pb-3 border-b border-gray-700/60">
+                <span className="text-xl leading-none">🌱</span>
+                <div>
+                  <h3 className="font-serif text-lg sm:text-xl font-bold text-white tracking-wide">
+                    Open Procurement (EOI/RFQ)
+                  </h3>
+                </div>
+              </div>
+
+              {/* Card Body Container matching Image 1 styling */}
+              <div className="bg-[#070e0a]/95 border border-emerald-950/90 rounded-2xl p-4 min-h-[220px] max-h-[300px] flex flex-col justify-center overflow-hidden">
+                {!procurementLoaded ? (
+                  <div className="py-8 text-center text-xs text-gray-400 font-mono animate-pulse">
+                    Loading procurement notices...
+                  </div>
+                ) : procurements.length === 0 ? (
+                  <p className="text-center text-sm font-serif italic text-gray-400 py-8">
+                    No active updates available.
+                  </p>
+                ) : (
+                  <div className="space-y-3.5 overflow-y-auto max-h-[260px] pr-1.5 custom-scrollbar">
+                    {procurements.map((item) => (
+                      <a
+                        key={item.id}
+                        href={item.link || "/volunteer#volunteer-form"}
+                        onClick={(e) => handleProcurementClick(e, item.link)}
+                        className="block p-3.5 rounded-xl bg-white/[0.04] hover:bg-emerald-900/30 border border-white/10 hover:border-emerald-500/40 transition-all duration-200 group"
+                      >
+                        <div className="flex items-center justify-between gap-2 mb-1.5">
+                          <span className="text-[10px] font-black uppercase tracking-wider bg-[var(--accent-gold)] text-[#13382C] px-2.5 py-0.5 rounded-full shadow-xs">
+                            {item.notice_type || "EOI/RFQ"}
+                          </span>
+                          <span className="text-[10px] text-gray-400 font-mono">
+                            {item.created_at ? new Date(item.created_at).toLocaleDateString("en-IN", { month: "short", day: "numeric" }) : "Active"}
+                          </span>
+                        </div>
+                        <h4 className="text-xs sm:text-sm font-bold text-gray-100 group-hover:text-[var(--accent-gold)] transition-colors leading-snug line-clamp-2">
+                          {item.title}
+                        </h4>
+                        {item.description && (
+                          <p className="text-[11px] text-gray-400 mt-1 line-clamp-2 font-normal leading-relaxed">
+                            {item.description}
+                          </p>
+                        )}
+                        <div className="mt-2.5 flex items-center gap-1.5 text-[11px] font-extrabold text-[var(--accent-gold)] group-hover:underline">
+                          <span>Apply via Volunteer Form</span>
+                          <FiArrowRight className="text-xs transition-transform group-hover:translate-x-1" />
+                        </div>
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Card Footer Link */}
+              <div className="pt-1 flex items-center justify-between text-[11px] text-gray-300 font-sans">
+                <span className="text-gray-400">Official Notice Board</span>
+                <a
+                  href="/volunteer#volunteer-form"
+                  onClick={(e) => handleProcurementClick(e, "/volunteer#volunteer-form")}
+                  className="text-[var(--accent-gold)] hover:underline font-extrabold flex items-center gap-1"
+                >
+                  <span>Volunteer Form &rarr;</span>
+                </a>
+              </div>
+
+            </div>
+          </div>
+
         </div>
       </div>
 
       {/* Slide Indicators */}
       {slides.length > 1 && (
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+        <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-20 flex gap-2">
           {slides.map((_, idx) => (
             <button
               key={idx}
@@ -112,3 +223,4 @@ export default function HeroSlider() {
     </section>
   );
 }
+
