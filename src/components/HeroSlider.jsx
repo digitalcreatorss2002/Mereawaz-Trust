@@ -24,17 +24,17 @@ export default function HeroSlider() {
   useEffect(() => {
     api.get("/hero.php")
       .then((res) => {
-        if (res?.data && res.data.length > 0) {
-          setSlides(res.data);
+        const list = Array.isArray(res) ? res : (res?.data && Array.isArray(res.data) ? res.data : []);
+        if (list.length > 0) {
+          setSlides(list);
         }
       })
       .catch(() => {});
 
     api.get("/procurement.php")
       .then((res) => {
-        if (res?.data && Array.isArray(res.data)) {
-          setProcurements(res.data);
-        }
+        const list = Array.isArray(res) ? res : (res?.data && Array.isArray(res.data) ? res.data : []);
+        setProcurements(list);
         setProcurementLoaded(true);
       })
       .catch(() => {
