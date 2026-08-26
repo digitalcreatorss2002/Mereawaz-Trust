@@ -170,7 +170,7 @@ export default function VolunteerBanner() {
                         required
                         value={form.name}
                         onChange={update("name")}
-                        placeholder="e.g. Ramesh Kumar"
+                        placeholder="e.g. Enter your full name"
                         className="w-full rounded-xl border border-white/20 bg-white/10 pl-10 pr-4 py-2.5 text-xs text-white placeholder-gray-300 focus:outline-none focus:border-[var(--accent-gold)] focus:bg-white/20 transition-all"
                       />
                     </div>
@@ -189,7 +189,7 @@ export default function VolunteerBanner() {
                           required
                           value={form.email}
                           onChange={update("email")}
-                          placeholder="ramesh@example.com"
+                          placeholder="Enter your email address"
                           className="w-full rounded-xl border border-white/20 bg-white/10 pl-10 pr-4 py-2.5 text-xs text-white placeholder-gray-300 focus:outline-none focus:border-[var(--accent-gold)] focus:bg-white/20 transition-all"
                         />
                       </div>
@@ -206,7 +206,7 @@ export default function VolunteerBanner() {
                           required
                           value={form.phone}
                           onChange={update("phone")}
-                          placeholder="+91 98765 43210"
+                          placeholder="Enter your phone number"
                           className="w-full rounded-xl border border-white/20 bg-white/10 pl-10 pr-4 py-2.5 text-xs text-white placeholder-gray-300 focus:outline-none focus:border-[var(--accent-gold)] focus:bg-white/20 transition-all"
                         />
                       </div>
