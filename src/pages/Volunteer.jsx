@@ -199,7 +199,7 @@ export default function Volunteer() {
                         required
                         value={form.name}
                         onChange={update("name")}
-                        placeholder="e.g. Ramesh Kumar"
+                        placeholder="e.g. Enter your full name"
                         className="w-full rounded-2xl border border-gray-200 pl-11 pr-4 py-3 text-sm focus:border-[var(--button-bg-color)] focus:outline-none"
                       />
                     </div>
@@ -218,7 +218,7 @@ export default function Volunteer() {
                           required
                           value={form.email}
                           onChange={update("email")}
-                          placeholder="ramesh@example.com"
+                          placeholder="Enter your email address"
                           className="w-full rounded-2xl border border-gray-200 pl-11 pr-4 py-3 text-sm focus:border-[var(--button-bg-color)] focus:outline-none"
                         />
                       </div>
@@ -234,7 +234,7 @@ export default function Volunteer() {
                           required
                           value={form.phone}
                           onChange={update("phone")}
-                          placeholder="+91 98765 43210"
+                          placeholder="Enter your phone number"
                           className="w-full rounded-2xl border border-gray-200 pl-11 pr-4 py-3 text-sm focus:border-[var(--button-bg-color)] focus:outline-none"
                         />
                       </div>
