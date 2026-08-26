@@ -27,7 +27,7 @@ export default function Properties() {
         subtitle="Community centers, agricultural drone projects, and digital literacy hubs active across India."
         bgImage="/hero-banner.jpg"
       />
-      <TickerBar />
+      {/* <TickerBar /> */}
 
       {/* Grid mode enabled & Heading hidden */}
       <PropertiesSection programs={items} showHeading={false} isGrid={true} />
