@@ -17,7 +17,8 @@ export default function Gallery() {
     api
       .get('/gallery.php?status=approved')
       .then((res) => {
-        setImages(res?.data || [])
+        const list = Array.isArray(res) ? res : (res?.data && Array.isArray(res.data) ? res.data : [])
+        setImages(list)
         setStatus('done')
       })
       .catch(() => setStatus('error'))

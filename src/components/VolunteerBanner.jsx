@@ -38,7 +38,11 @@ export default function VolunteerBanner() {
   useEffect(() => {
     api.get("/procurement.php")
       .then((res) => {
-        const list = Array.isArray(res) ? res : (res?.data && Array.isArray(res.data) ? res.data : []);
+        const list = Array.isArray(res) 
+          ? res 
+          : (res?.data && Array.isArray(res.data) 
+            ? res.data 
+            : (res?.items && Array.isArray(res.items) ? res.items : []));
         setProcurements(list);
         setProcurementLoaded(true);
       })
