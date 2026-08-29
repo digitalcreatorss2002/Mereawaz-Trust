@@ -44,19 +44,23 @@ export default function PropertiesSection({
         key={p.id || p.slug || Math.random()}
         className="group relative h-full min-h-[380px] sm:min-h-[420px] w-full rounded-3xl bg-[#13382C] p-6 sm:p-8 border border-amber-200/30 shadow-xl transition-all duration-500 overflow-hidden flex flex-col justify-between cursor-pointer hover:shadow-2xl hover:-translate-y-2 animate-fade-up"
       >
-        {/* 1. BACKGROUND IMAGE (Reveals on Hover) */}
+        {/* 1. BACKGROUND IMAGE (Visible by default, zooms smoothly on hover) */}
         {imgSrc && (
-          <div className="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+          <div className="absolute inset-0 z-0 opacity-40 group-hover:opacity-60 transition-all duration-700 pointer-events-none">
             <img
               src={imgSrc}
               alt={cardTitle}
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = "/about-banner.jpg";
+              }}
             />
           </div>
         )}
 
-        {/* 2. GRADIENT OVERLAY */}
-        <div className="absolute inset-0 z-[1] origin-bottom scale-y-0 group-hover:scale-y-100 transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] pointer-events-none bg-gradient-to-t from-black/90 via-[#13382C]/85 to-[#13382C]/70" />
+        {/* 2. GRADIENT OVERLAY FOR ACCESSIBILITY & CONTRAST */}
+        <div className="absolute inset-0 z-[1] pointer-events-none bg-gradient-to-t from-[#0d221b] via-[#13382C]/90 to-[#13382C]/60 transition-opacity duration-500 group-hover:opacity-90" />
 
         {/* 3. CARD CONTENT */}
         <div className="relative z-10 flex flex-col h-full justify-between">

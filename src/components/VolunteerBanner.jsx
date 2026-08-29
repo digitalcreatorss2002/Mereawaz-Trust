@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { FaCheckCircle, FaUser, FaEnvelope, FaPhoneAlt, FaPaperPlane } from "react-icons/fa";
-import { FiArrowUpRight } from "react-icons/fi";
+import { FiArrowRight } from "react-icons/fi";
 import { api } from "../api.js";
 import SubmissionAlert from "./SubmissionAlert.jsx";
 
@@ -30,6 +30,40 @@ export default function VolunteerBanner() {
   const [showAlert, setShowAlert] = useState(false);
   const [error, setError] = useState("");
 
+  const [procurements, setProcurements] = useState([]);
+  const [procurementLoaded, setProcurementLoaded] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
+  const scrollRef = useRef(null);
+
+  useEffect(() => {
+    api.get("/procurement.php")
+      .then((res) => {
+        const list = Array.isArray(res) ? res : (res?.data && Array.isArray(res.data) ? res.data : []);
+        setProcurements(list);
+        setProcurementLoaded(true);
+      })
+      .catch(() => {
+        setProcurementLoaded(true);
+      });
+  }, []);
+
+  // Continuous auto-scroll ticker for procurement notices
+  useEffect(() => {
+    if (isPaused || procurements.length <= 1) return;
+    const container = scrollRef.current;
+    if (!container) return;
+
+    const timer = setInterval(() => {
+      if (container.scrollTop + container.clientHeight >= container.scrollHeight - 2) {
+        container.scrollTop = 0;
+      } else {
+        container.scrollTop += 1;
+      }
+    }, 35);
+
+    return () => clearInterval(timer);
+  }, [isPaused, procurements.length]);
+
   const update = (key) => (e) =>
     setForm((f) => ({ ...f, [key]: e.target.value }));
 
@@ -56,81 +90,139 @@ export default function VolunteerBanner() {
     }
   };
 
+  const handleProcurementClick = (e, linkUrl) => {
+    if (!linkUrl) {
+      const formEl = document.getElementById("volunteer-form");
+      if (formEl) {
+        e.preventDefault();
+        formEl.scrollIntoView({ behavior: "smooth", block: "center" });
+        return;
+      }
+    }
+    if (linkUrl && linkUrl.includes("#volunteer-form")) {
+      const formEl = document.getElementById("volunteer-form");
+      if (formEl) {
+        e.preventDefault();
+        formEl.scrollIntoView({ behavior: "smooth", block: "center" });
+        return;
+      }
+    }
+    if (linkUrl) {
+      window.location.href = linkUrl;
+    }
+  };
+
   return (
-    <section id="volunteer-form" className="bg-white py-12 lg:py-16 overflow-hidden font-sans scroll-mt-20">
+    <section id="volunteer-form" className="bg-[#F8FAF9] py-12 lg:py-16 overflow-hidden font-sans scroll-mt-20">
       <div className="container-page">
-        <div className="grid lg:grid-cols-12 items-center min-h-[620px] gap-8">
+        <div className="grid lg:grid-cols-12 items-stretch min-h-[600px] gap-8">
           
-          {/* ================= LEFT COLUMN: CONTENT & BULLET POINTS ================= */}
-          <div className="lg:col-span-6 p-4 sm:p-6 lg:p-8 flex flex-col justify-center space-y-6 animate-fade-right">
+          {/* ================= LEFT COLUMN: OPEN PROCUREMENT (EOI/RFQ) ================= */}
+          <div className="lg:col-span-6 flex flex-col justify-between bg-[#0d1612] text-white rounded-[32px] p-6 sm:p-8 shadow-2xl border border-emerald-900/40 animate-fade-right">
             
-            {/* Pill Eyebrow Badge */}
             <div>
-              <span className="inline-flex items-center gap-2 rounded-full border border-[var(--accent-gold)] bg-[var(--button-bg-color)] px-4 py-1 text-xs font-bold text-[var(--text-color-light)]">
-                <span className="h-2 w-2 rounded-full bg-[var(--accent-gold)] inline-block animate-ping" />
-                <span>Join As A Volunteer</span>
-              </span>
+              {/* Header */}
+              <div className="flex items-center justify-between pb-4 border-b border-emerald-800/40 mb-6">
+                <div className="flex items-center gap-3">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[var(--button-bg-color)] text-[var(--accent-gold)] text-lg shadow-sm">
+                    🌱
+                  </span>
+                  <div>
+                    <span className="text-[10px] font-black uppercase tracking-widest text-[var(--accent-gold)]">
+                      OFFICIAL NOTICE BOARD
+                    </span>
+                    <h3 className="font-display text-xl sm:text-2xl font-bold text-white leading-tight">
+                      Open Procurement (EOI/RFQ)
+                    </h3>
+                  </div>
+                </div>
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-950 px-3 py-1 text-[11px] font-bold text-emerald-400 border border-emerald-800/50">
+                  <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+                  Live Updates
+                </span>
+              </div>
+
+              <p className="text-xs sm:text-sm text-gray-300 mb-6 leading-relaxed">
+                Active Expressions of Interest (EOI), Requests for Proposals (RFP), and Quotations (RFQ) for Meri Awaz Trust field programs.
+              </p>
+
+              {/* Procurement Notices List Container */}
+              <div className="bg-[#070e0a] border border-emerald-950/90 rounded-2xl p-3 sm:p-4 min-h-[320px] max-h-[400px] flex flex-col justify-center overflow-hidden">
+                {!procurementLoaded ? (
+                  <div className="py-12 text-center text-xs text-gray-400 font-mono animate-pulse">
+                    Loading procurement notices...
+                  </div>
+                ) : procurements.length === 0 ? (
+                  <div className="py-12 text-center space-y-2">
+                    <p className="text-sm font-serif italic text-gray-400">
+                      No active procurement notices available at the moment.
+                    </p>
+                    <p className="text-xs text-gray-500">
+                      Check back later or register as a volunteer below to stay updated.
+                    </p>
+                  </div>
+                ) : (
+                  <div
+                    ref={scrollRef}
+                    onMouseEnter={() => setIsPaused(true)}
+                    onMouseLeave={() => setIsPaused(false)}
+                    className="space-y-3 overflow-y-auto h-full pr-1 custom-scrollbar scroll-smooth"
+                  >
+                    {procurements.map((item) => (
+                      <a
+                        key={item.id}
+                        href={item.link || "#volunteer-form"}
+                        onClick={(e) => handleProcurementClick(e, item.link)}
+                        className="block p-4 rounded-xl bg-white/[0.04] hover:bg-emerald-900/40 border border-white/10 hover:border-emerald-500/50 transition-all duration-200 group"
+                      >
+                        <div className="flex items-center justify-between gap-2 mb-2">
+                          <span className="text-[10px] font-black uppercase tracking-wider bg-[var(--accent-gold)] text-[#13382C] px-2.5 py-0.5 rounded-full shadow-xs">
+                            {item.notice_type || "EOI/RFQ"}
+                          </span>
+                          <span className="text-[10px] text-gray-400 font-mono">
+                            {item.created_at ? new Date(item.created_at).toLocaleDateString("en-IN", { month: "short", day: "numeric", year: "numeric" }) : "Active"}
+                          </span>
+                        </div>
+                        <h4 className="text-xs sm:text-sm font-bold text-gray-100 group-hover:text-[var(--accent-gold)] transition-colors leading-snug">
+                          {item.title}
+                        </h4>
+                        {item.description && (
+                          <p className="text-xs text-gray-400 mt-1.5 line-clamp-3 font-normal leading-relaxed">
+                            {item.description}
+                          </p>
+                        )}
+                        <div className="mt-3 flex items-center gap-1.5 text-xs font-extrabold text-[var(--accent-gold)] group-hover:underline">
+                          <span>Apply / Contact via Volunteer Form</span>
+                          <FiArrowRight className="text-xs transition-transform group-hover:translate-x-1" />
+                        </div>
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
 
-            {/* Main Heading */}
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-black text-[var(--text-color)] leading-[1.15] tracking-tight">
-              Become A Volunteer
-            </h2>
-
-            {/* Paragraph 1 */}
-            <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-              Join us in creating positive change. By volunteering, you can contribute your skills and time meaningfully to initiatives, support communities directly, and be part of a compassionate network committed to building a fairer, stronger, and more inclusive society.
-            </p>
-
-            {/* Paragraph 2 */}
-            <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-              Be part of something bigger. As a volunteer, you’ll work alongside passionate individuals to support communities, address real needs, and inspire change.
-            </p>
-
-            <div className="w-full h-px bg-gray-100 my-2" />
-
-            {/* Key Bullet Points */}
-            <div className="space-y-3 pt-1">
-              <div className="flex items-start gap-3">
-                <FaCheckCircle className="text-[var(--button-bg-color)] text-base shrink-0 mt-0.5" />
-                <span className="text-xs sm:text-sm font-bold text-gray-700 leading-snug">
-                  Contribute your time and skills to programs that directly support.
-                </span>
-              </div>
-              <div className="flex items-start gap-3">
-                <FaCheckCircle className="text-[var(--button-bg-color)] text-base shrink-0 mt-0.5" />
-                <span className="text-xs sm:text-sm font-bold text-gray-700 leading-snug">
-                  Join a network of like-minded volunteers who believe in compassion.
-                </span>
-              </div>
-              <div className="flex items-start gap-3">
-                <FaCheckCircle className="text-[var(--button-bg-color)] text-base shrink-0 mt-0.5" />
-                <span className="text-xs sm:text-sm font-bold text-gray-700 leading-snug">
-                  Gain hands-on experience, build leadership skills, and work alongside.
-                </span>
-              </div>
-            </div>
-
-            {/* CTA Action Button */}
-            <div className="pt-4">
-              <Link
-                to="/volunteer"
-                className="inline-flex items-center gap-2 rounded-xl bg-[var(--button-bg-color)] hover:bg-[var(--button-hover-color)] px-7 py-3.5 text-xs sm:text-sm font-black text-[var(--text-color-light)] shadow-sm transition-all duration-300 hover:scale-105 active:scale-95"
+            {/* Footer */}
+            <div className="pt-4 border-t border-emerald-900/50 flex flex-wrap items-center justify-between gap-2 text-xs text-gray-400">
+              <span>Have a procurement inquiry?</span>
+              <a
+                href="#volunteer-form"
+                onClick={(e) => handleProcurementClick(e, "#volunteer-form")}
+                className="text-[var(--accent-gold)] font-extrabold hover:underline flex items-center gap-1"
               >
-                <span>Full Volunteer Page</span>
-                <FiArrowUpRight className="text-base" />
-              </Link>
+                <span>Submit Application Below &rarr;</span>
+              </a>
             </div>
 
           </div>
 
           {/* ================= RIGHT COLUMN: VOLUNTEER FORM ================= */}
           <div className="lg:col-span-6 w-full flex items-center justify-center animate-fade-left">
-            <div className="w-full bg-[var(--button-bg-color)] rounded-[32px] p-6 sm:p-8 lg:p-10 shadow-2xl border border-gray-100/80 text-white">
+            <div className="w-full h-full bg-[var(--button-bg-color)] rounded-[32px] p-6 sm:p-8 lg:p-10 shadow-2xl border border-gray-100/80 text-white flex flex-col justify-center">
               
               <div className="text-center mb-6">
                 <span className="inline-block rounded-full bg-[var(--accent-gold)] px-3.5 py-1 text-[11px] font-black uppercase tracking-wider text-[#13382C] mb-2">
-                  VOLUNTEER REGISTRATION
+                  BECOME A VOLUNTEER
                 </span>
                 <h3 className="font-display text-xl sm:text-2xl font-bold text-white">
                   Apply to Join As A Volunteer

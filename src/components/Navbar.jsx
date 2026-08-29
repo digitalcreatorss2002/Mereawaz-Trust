@@ -114,7 +114,7 @@ export default function Navbar() {
           <NavLink to="/" className="flex items-center gap-3 group">
             <div className="relative overflow-hidden rounded-xl p-1 bg-white shadow-sm border border-black/5 transition-transform duration-300 group-hover:scale-105">
               <img
-                src="/meriawajtrust.png"
+                src="/logo.png"
                 alt="Meri Awaz Trust Logo"
                 className="h-12 w-auto object-contain sm:h-14"
               />
