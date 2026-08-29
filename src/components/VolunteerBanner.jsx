@@ -229,7 +229,7 @@ export default function VolunteerBanner() {
               
               <div className="text-center mb-6">
                 <span className="inline-block rounded-full bg-[var(--accent-gold)] px-3.5 py-1 text-[11px] font-black uppercase tracking-wider text-[#13382C] mb-2">
-                  BECOME A VOLUNTEER
+                  Career with Us
                 </span>
                 <h3 className="font-display text-xl sm:text-2xl font-bold text-white">
                   Apply to Join As A Volunteer
@@ -358,7 +358,7 @@ export default function VolunteerBanner() {
                     className="w-full py-3.5 px-6 rounded-xl bg-[var(--accent-gold)] hover:bg-yellow-400 text-[#13382C] font-black text-xs sm:text-sm shadow-md transition-all duration-300 hover:scale-[1.02] active:scale-95 disabled:opacity-60 flex items-center justify-center gap-2"
                   >
                     <FaPaperPlane className="text-xs" />
-                    <span>{status === "sending" ? "Submitting Application..." : "Submit Volunteer Application"}</span>
+                    <span>{status === "sending" ? "Submitting Application..." : "Submit Career Application"}</span>
                   </button>
                 </form>
               )}
