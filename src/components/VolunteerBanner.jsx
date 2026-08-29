@@ -48,14 +48,18 @@ export default function VolunteerBanner() {
       });
   }, []);
 
-  // Continuous auto-scroll ticker for procurement notices
+  // Continuous seamless auto-scroll ticker for procurement notices
   useEffect(() => {
     if (isPaused || procurements.length <= 1) return;
     const container = scrollRef.current;
     if (!container) return;
 
     const timer = setInterval(() => {
-      if (container.scrollTop + container.clientHeight >= container.scrollHeight - 2) {
+      if (!container) return;
+      const maxScroll = container.scrollHeight - container.clientHeight;
+      if (maxScroll <= 0) return;
+
+      if (container.scrollTop >= maxScroll - 1) {
         container.scrollTop = 0;
       } else {
         container.scrollTop += 1;
@@ -64,6 +68,8 @@ export default function VolunteerBanner() {
 
     return () => clearInterval(timer);
   }, [isPaused, procurements.length]);
+
+  const displayProcurements = procurements.length > 1 ? [...procurements, ...procurements] : procurements;
 
   const update = (key) => (e) =>
     setForm((f) => ({ ...f, [key]: e.target.value }));
@@ -167,11 +173,11 @@ export default function VolunteerBanner() {
                     ref={scrollRef}
                     onMouseEnter={() => setIsPaused(true)}
                     onMouseLeave={() => setIsPaused(false)}
-                    className="space-y-3 overflow-y-auto h-full pr-1 custom-scrollbar scroll-smooth"
+                    className="space-y-3 overflow-y-auto h-full pr-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden scroll-smooth"
                   >
-                    {procurements.map((item) => (
+                    {displayProcurements.map((item, idx) => (
                       <a
-                        key={item.id}
+                        key={`${item.id}-${idx}`}
                         href={item.link || "#volunteer-form"}
                         onClick={(e) => handleProcurementClick(e, item.link)}
                         className="block p-4 rounded-xl bg-white/[0.04] hover:bg-emerald-900/40 border border-white/10 hover:border-emerald-500/50 transition-all duration-200 group"
