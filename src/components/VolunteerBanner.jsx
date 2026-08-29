@@ -36,10 +36,11 @@ export default function VolunteerBanner() {
   const scrollRef = useRef(null);
 
   useEffect(() => {
-    api.get("/procurement.php")
+    api.get("/procurement.php?status=all")
       .then((res) => {
         const list = extractData(res);
-        setProcurements(list);
+        const activeList = list.filter((item) => !item.status || String(item.status).toLowerCase() === 'active');
+        setProcurements(activeList.length > 0 ? activeList : list);
         setProcurementLoaded(true);
       })
       .catch(() => {
