@@ -1,8 +1,14 @@
+export function extractData(res) {
+  if (Array.isArray(res)) return res;
+  if (Array.isArray(res?.data)) return res.data;
+  if (Array.isArray(res?.items)) return res.items;
+  if (Array.isArray(res?.data?.data)) return res.data.data;
+  return [];
+}
+
 export const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'https://hrntechsolutions.com/mereawaz_backend'
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://hrntechsolutions.com/mereawaz_backend/api'
-
-
 
 export function getImageUrl(path) {
   if (!path) return ''
@@ -58,4 +64,5 @@ export const api = {
     }),
   del: (path) => request(path, { method: 'DELETE' }),
 }
+
 

@@ -12,7 +12,7 @@ import PartnerLogos from "../components/PartnerLogos.jsx";
 import TestimonialCard from "../components/TestimonialCard.jsx";
 import InfiniteSlider from "../components/InfiniteSlider.jsx";
 import FaqSection from "../components/FaqSection.jsx";
-import { api, getImageUrl } from "../api.js";
+import { api, getImageUrl, extractData } from "../api.js";
 import AboutStats from "../components/AboutStats.jsx";
 import TickerBar from "../components/TickerBar.jsx";
 
@@ -24,15 +24,15 @@ export default function Home() {
   useEffect(() => {
     api
       .get("/testimonials.php?status=approved&limit=10")
-      .then((res) => setTestimonials(res?.data || []))
+      .then((res) => setTestimonials(extractData(res)))
       .catch(() => {});
     api
       .get("/properties.php")
-      .then((res) => setDbPrograms(res?.data || []))
+      .then((res) => setDbPrograms(extractData(res)))
       .catch(() => {});
     api
       .get("/blog.php?status=published")
-      .then((res) => setBlogPosts(res?.data || []))
+      .then((res) => setBlogPosts(extractData(res)))
       .catch(() => {});
   }, []);
 

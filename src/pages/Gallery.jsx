@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { FaExpand, FaTimes, FaFolder, FaArrowLeft, FaImages, FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 import PageHeader from '../components/PageHeader.jsx'
 import Loader from '../components/Loader.jsx'
-import { api, getImageUrl } from '../api.js'
+import { api, getImageUrl, extractData } from '../api.js'
 
 export default function Gallery() {
   const [images, setImages] = useState([])
@@ -17,7 +17,7 @@ export default function Gallery() {
     api
       .get('/gallery.php?status=approved')
       .then((res) => {
-        const list = Array.isArray(res) ? res : (res?.data && Array.isArray(res.data) ? res.data : [])
+        const list = extractData(res)
         setImages(list)
         setStatus('done')
       })

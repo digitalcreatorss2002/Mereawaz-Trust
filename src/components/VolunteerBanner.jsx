@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { FaCheckCircle, FaUser, FaEnvelope, FaPhoneAlt, FaPaperPlane } from "react-icons/fa";
 import { FiArrowRight } from "react-icons/fi";
-import { api } from "../api.js";
+import { api, extractData } from "../api.js";
 import SubmissionAlert from "./SubmissionAlert.jsx";
 
 const SKILL_OPTIONS = [
@@ -38,11 +38,7 @@ export default function VolunteerBanner() {
   useEffect(() => {
     api.get("/procurement.php")
       .then((res) => {
-        const list = Array.isArray(res) 
-          ? res 
-          : (res?.data && Array.isArray(res.data) 
-            ? res.data 
-            : (res?.items && Array.isArray(res.items) ? res.items : []));
+        const list = extractData(res);
         setProcurements(list);
         setProcurementLoaded(true);
       })

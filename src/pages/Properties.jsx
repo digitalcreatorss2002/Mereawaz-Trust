@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import PageHeader from '../components/PageHeader.jsx'
 import PropertiesSection from '../components/PropertiesSection.jsx'
 import Loader from '../components/Loader.jsx'
-import { api } from '../api.js'
+import { api, extractData } from '../api.js'
 import TickerBar from '../components/TickerBar.jsx'
 
 export default function Properties() {
@@ -13,7 +13,7 @@ export default function Properties() {
     api
       .get('/properties.php')
       .then((res) => {
-        setItems(res?.data || [])
+        setItems(extractData(res))
         setStatus('done')
       })
       .catch(() => setStatus('error'))
