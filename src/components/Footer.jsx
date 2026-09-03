@@ -67,7 +67,11 @@ export default function Footer() {
           <div className="lg:col-span-4 space-y-4">
             <Link to="/" className="flex items-center gap-3">
               <div className="rounded-xl bg-white p-1 shadow-sm border border-white/20">
-                <img src="/meriawajtrust.png" alt="Meri Awaz Trust Logo" className="h-12 w-auto object-contain" />
+                <img
+                src="/logo.png"
+                alt="Meri Awaz Trust Logo"
+                className="h-12 w-auto object-contain sm:h-14"
+              />
               </div>
               <span className="font-display text-xl font-extrabold text-white">
                 Meri Awaz <span className="text-[var(--primary-color)]">Trust</span>
