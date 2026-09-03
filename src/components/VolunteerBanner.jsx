@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
-import { FaCheckCircle, FaUser, FaEnvelope, FaPhoneAlt, FaPaperPlane } from "react-icons/fa";
+import { FaCheckCircle, FaUser, FaEnvelope, FaPhoneAlt, FaPaperPlane, FaFilePdf } from "react-icons/fa";
 import { FiArrowRight } from "react-icons/fi";
 import { api, extractData } from "../api.js";
 import SubmissionAlert from "./SubmissionAlert.jsx";
+
+const BACKEND_URL = "https://your-api-domain.com"; // Replace with your PHP backend root URL
 
 const SKILL_OPTIONS = [
   "Program Manager",
@@ -23,7 +24,7 @@ export default function VolunteerBanner() {
     message: "",
   });
 
-  const [status, setStatus] = useState("idle"); // idle | sending | sent | error
+  const [status, setStatus] = useState("idle");
   const [showAlert, setShowAlert] = useState(false);
   const [error, setError] = useState("");
 
@@ -45,7 +46,6 @@ export default function VolunteerBanner() {
       });
   }, []);
 
-  // Continuous seamless auto-scroll ticker for procurement notices
   useEffect(() => {
     if (isPaused || procurements.length <= 1) return;
     const container = scrollRef.current;
@@ -67,9 +67,7 @@ export default function VolunteerBanner() {
   }, [isPaused, procurements.length]);
 
   const displayProcurements = procurements.length > 1 ? [...procurements, ...procurements] : procurements;
-
-  const update = (key) => (e) =>
-    setForm((f) => ({ ...f, [key]: e.target.value }));
+  const update = (key) => (e) => setForm((f) => ({ ...f, [key]: e.target.value }));
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -94,26 +92,11 @@ export default function VolunteerBanner() {
     }
   };
 
-  const handleProcurementClick = (e, linkUrl) => {
-    if (!linkUrl) {
-      const formEl = document.getElementById("volunteer-form");
-      if (formEl) {
-        e.preventDefault();
-        formEl.scrollIntoView({ behavior: "smooth", block: "center" });
-        return;
-      }
+  const getDocUrl = (pdfPath, fallbackLink) => {
+    if (pdfPath) {
+      return pdfPath.startsWith("http") ? pdfPath : `${BACKEND_URL}${pdfPath}`;
     }
-    if (linkUrl && linkUrl.includes("#volunteer-form")) {
-      const formEl = document.getElementById("volunteer-form");
-      if (formEl) {
-        e.preventDefault();
-        formEl.scrollIntoView({ behavior: "smooth", block: "center" });
-        return;
-      }
-    }
-    if (linkUrl) {
-      window.location.href = linkUrl;
-    }
+    return fallbackLink || "#volunteer-form";
   };
 
   return (
@@ -121,112 +104,107 @@ export default function VolunteerBanner() {
       <div className="container-page">
         <div className="grid lg:grid-cols-12 items-stretch min-h-[600px] gap-8">
           
-          {/* ================= LEFT COLUMN: OPEN PROCUREMENT (EOI/RFQ) ================= */}
-<div className="lg:col-span-6 flex flex-col justify-between bg-white text-slate-900 rounded-[32px] p-6 sm:p-8 shadow-xl shadow-emerald-950/5 border-2 border-[#244B41] animate-fade-right">
-  
-  <div>
-    {/* Header */}
-    <div className="flex items-center justify-between pb-4 border-b border-emerald-100 mb-6">
-      <div className="flex items-center gap-3">
-        <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-800 text-lg shadow-sm border border-emerald-200/60">
-          🌱
-        </span>
-        <div>
-          <span className="text-[10px] font-black uppercase tracking-widest text-emerald-700">
-            OFFICIAL NOTICE BOARD
-          </span>
-          <h3 className="font-display text-xl sm:text-2xl font-bold text-slate-900 leading-tight">
-            Open Procurement (EOI/RFQ)
-          </h3>
-        </div>
-      </div>
-      <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1 text-[11px] font-bold text-emerald-700 border border-emerald-200/80 shadow-xs">
-        <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-        Live Updates
-      </span>
-    </div>
-
-    <p className="text-xs sm:text-sm text-slate-600 mb-6 leading-relaxed">
-      Active Expressions of Interest (EOI), Requests for Proposals (RFP), and Quotations (RFQ) for Meri Awaz Trust field programs.
-    </p>
-
-    {/* Procurement Notices List Container */}
-    <div className="bg-slate-50/80 border border-slate-200/80 rounded-2xl p-3 sm:p-4 min-h-[320px] max-h-[400px] flex flex-col justify-center overflow-hidden">
-      {!procurementLoaded ? (
-        <div className="py-12 text-center text-xs text-slate-500 font-mono animate-pulse">
-          Loading procurement notices...
-        </div>
-      ) : procurements.length === 0 ? (
-        <div className="py-12 text-center space-y-2">
-          <p className="text-sm font-serif italic text-slate-600">
-            No active procurement notices available at the moment.
-          </p>
-          <p className="text-xs text-slate-400">
-            Check back later or register as a volunteer below to stay updated.
-          </p>
-        </div>
-      ) : (
-        <div
-          ref={scrollRef}
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
-          className="space-y-3 overflow-y-auto h-full pr-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden scroll-smooth"
-        >
-          {displayProcurements.map((item, idx) => (
-            <a
-              key={`${item.id}-${idx}`}
-              href={item.link || "#volunteer-form"}
-              onClick={(e) => handleProcurementClick(e, item.link)}
-              className="block p-4 rounded-xl bg-white hover:bg-emerald-50/40 border border-slate-200/90 hover:border-emerald-400/80 shadow-xs hover:shadow-md transition-all duration-200 group"
-            >
-              <div className="flex items-center justify-between gap-2 mb-2">
-                <span className="text-[10px] font-black uppercase tracking-wider bg-emerald-100 text-emerald-900 px-2.5 py-0.5 rounded-full border border-emerald-200/60 shadow-xs">
-                  {item.notice_type || "EOI/RFQ"}
-                </span>
-                <span className="text-[10px] text-slate-400 font-mono">
-                  {item.created_at ? new Date(item.created_at).toLocaleDateString("en-IN", { month: "short", day: "numeric", year: "numeric" }) : "Active"}
+          {/* LEFT COLUMN: OPEN PROCUREMENT */}
+          <div className="lg:col-span-6 flex flex-col justify-between bg-white text-slate-900 rounded-[32px] p-6 sm:p-8 shadow-xl shadow-emerald-950/5 border-2 border-[#244B41] animate-fade-right">
+            <div>
+              <div className="flex items-center justify-between pb-4 border-b border-emerald-100 mb-6">
+                <div className="flex items-center gap-3">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-800 text-lg shadow-sm border border-emerald-200/60">
+                    🌱
+                  </span>
+                  <div>
+                    <span className="text-[10px] font-black uppercase tracking-widest text-emerald-700">
+                      OFFICIAL NOTICE BOARD
+                    </span>
+                    <h3 className="font-display text-xl sm:text-2xl font-bold text-slate-900 leading-tight">
+                      Open Procurement (EOI/RFQ)
+                    </h3>
+                  </div>
+                </div>
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1 text-[11px] font-bold text-emerald-700 border border-emerald-200/80 shadow-xs">
+                  <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+                  Live Updates
                 </span>
               </div>
-              <h4 className="text-xs sm:text-sm font-bold text-slate-800 group-hover:text-emerald-700 transition-colors leading-snug">
-                {item.title}
-              </h4>
-              {item.description && (
-                <p className="text-xs text-slate-600 mt-1.5 line-clamp-3 font-normal leading-relaxed">
-                  {item.description}
-                </p>
-              )}
-              <div className="mt-3 flex items-center gap-1.5 text-xs font-extrabold text-emerald-700 group-hover:text-emerald-800 group-hover:underline">
-                <span>Apply / Contact via Volunteer Form</span>
-                <FiArrowRight className="text-xs transition-transform group-hover:translate-x-1 text-emerald-700" />
+
+              <p className="text-xs sm:text-sm text-slate-600 mb-6 leading-relaxed">
+                Active Expressions of Interest (EOI), Requests for Proposals (RFP), and Quotations (RFQ) for Meri Awaz Trust field programs.
+              </p>
+
+              <div className="bg-slate-50/80 border border-slate-200/80 rounded-2xl p-3 sm:p-4 min-h-[320px] max-h-[400px] flex flex-col justify-center overflow-hidden">
+                {!procurementLoaded ? (
+                  <div className="py-12 text-center text-xs text-slate-500 font-mono animate-pulse">
+                    Loading procurement notices...
+                  </div>
+                ) : procurements.length === 0 ? (
+                  <div className="py-12 text-center space-y-2">
+                    <p className="text-sm font-serif italic text-slate-600">
+                      No active procurement notices available at the moment.
+                    </p>
+                    <p className="text-xs text-slate-400">
+                      Check back later or register below to stay updated.
+                    </p>
+                  </div>
+                ) : (
+                  <div
+                    ref={scrollRef}
+                    onMouseEnter={() => setIsPaused(true)}
+                    onMouseLeave={() => setIsPaused(false)}
+                    className="space-y-3 overflow-y-auto h-full pr-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden scroll-smooth"
+                  >
+                    {displayProcurements.map((item, idx) => {
+                      const docTarget = getDocUrl(item.pdf_file, item.link);
+                      return (
+                        <a
+                          key={`${item.id}-${idx}`}
+                          href={docTarget}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block p-4 rounded-xl bg-white hover:bg-emerald-50/40 border border-slate-200/90 hover:border-emerald-400/80 shadow-xs hover:shadow-md transition-all duration-200 group"
+                        >
+                          <div className="flex items-center justify-between gap-2 mb-2">
+                            <span className="text-[10px] font-black uppercase tracking-wider bg-emerald-100 text-emerald-900 px-2.5 py-0.5 rounded-full border border-emerald-200/60 shadow-xs">
+                              {item.notice_type || "EOI/RFQ"}
+                            </span>
+                            <span className="text-[10px] text-slate-400 font-mono">
+                              {item.created_at ? new Date(item.created_at).toLocaleDateString("en-IN", { month: "short", day: "numeric", year: "numeric" }) : "Active"}
+                            </span>
+                          </div>
+                          <h4 className="text-xs sm:text-sm font-bold text-slate-800 group-hover:text-emerald-700 transition-colors leading-snug">
+                            {item.title}
+                          </h4>
+                          {item.description && (
+                            <p className="text-xs text-slate-600 mt-1.5 line-clamp-3 font-normal leading-relaxed">
+                              {item.description}
+                            </p>
+                          )}
+                          <div className="mt-3 flex items-center gap-1.5 text-xs font-extrabold text-emerald-700 group-hover:text-emerald-800 group-hover:underline">
+                            <FaFilePdf className="text-xs text-red-500" />
+                            <span>View Notice Document (PDF)</span>
+                            <FiArrowRight className="text-xs transition-transform group-hover:translate-x-1 text-emerald-700" />
+                          </div>
+                        </a>
+                      );
+                    })}
+                  </div>
+                )}
               </div>
-            </a>
-          ))}
-        </div>
-      )}
-    </div>
-  </div>
+            </div>
 
-  {/* Footer */}
-  <div className="pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500">
-    <span>Have a procurement inquiry?</span>
-    <a
-      href="#volunteer-form"
-      onClick={(e) => handleProcurementClick(e, "#volunteer-form")}
-      className="text-emerald-700 font-extrabold hover:text-emerald-900 hover:underline flex items-center gap-1"
-    >
-      <span>Submit Application Below &rarr;</span>
-    </a>
-  </div>
+            <div className="pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500">
+              <span>Have a procurement inquiry?</span>
+              <a href="#volunteer-form" className="text-emerald-700 font-extrabold hover:text-emerald-900 hover:underline flex items-center gap-1">
+                <span>Submit Application Below &rarr;</span>
+              </a>
+            </div>
+          </div>
 
-</div>
-
-          {/* ================= RIGHT COLUMN: VOLUNTEER FORM ================= */}
+          {/* RIGHT COLUMN: VOLUNTEER FORM */}
           <div className="lg:col-span-6 w-full flex items-center justify-center animate-fade-left">
             <div className="w-full h-full bg-[var(--button-bg-color)] rounded-[32px] p-6 sm:p-8 lg:p-10 shadow-2xl border border-gray-100/80 text-white flex flex-col justify-center">
-              
               <div className="text-center mb-6">
                 <span className="inline-block rounded-full bg-[var(--accent-gold)] px-3.5 py-1 text-[11px] font-black uppercase tracking-wider text-[#13382C] mb-2">
-                 Job Opportunities
+                  Job Opportunities
                 </span>
                 <h3 className="font-display text-xl sm:text-2xl font-bold text-white">
                   Career with Us
@@ -254,7 +232,6 @@ export default function VolunteerBanner() {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
-                  {/* Name Input */}
                   <div>
                     <label className="block text-[11px] font-bold uppercase tracking-wider text-gray-200 mb-1">
                       Full Name *
@@ -272,7 +249,6 @@ export default function VolunteerBanner() {
                     </div>
                   </div>
 
-                  {/* Email & Phone in 2 Columns */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-[11px] font-bold uppercase tracking-wider text-gray-200 mb-1">
@@ -309,7 +285,6 @@ export default function VolunteerBanner() {
                     </div>
                   </div>
 
-                  {/* Skill Dropdown */}
                   <div>
                     <label className="block text-[11px] font-bold uppercase tracking-wider text-gray-200 mb-1">
                       Primary Area of Expertise / Interest
@@ -327,7 +302,6 @@ export default function VolunteerBanner() {
                     </select>
                   </div>
 
-                  {/* Motivation / Message */}
                   <div>
                     <label className="block text-[11px] font-bold uppercase tracking-wider text-gray-200 mb-1">
                       Message / How you wish to contribute *
@@ -348,7 +322,6 @@ export default function VolunteerBanner() {
                     </p>
                   )}
 
-                  {/* Submit Button */}
                   <button
                     type="submit"
                     disabled={status === "sending"}
