@@ -125,7 +125,7 @@ export default function VolunteerBanner() {
         <div className="grid lg:grid-cols-12 items-stretch min-h-[600px] gap-8">
           
           {/* ================= LEFT COLUMN: OPEN PROCUREMENT (EOI/RFQ) ================= */}
-<div className="lg:col-span-6 flex flex-col justify-between bg-white text-slate-900 rounded-[32px] p-6 sm:p-8 shadow-xl shadow-emerald-950/5 border border-emerald-100 animate-fade-right">
+<div className="lg:col-span-6 flex flex-col justify-between bg-white text-slate-900 rounded-[32px] p-6 sm:p-8 shadow-xl shadow-emerald-950/5 border border-emerald-500 animate-fade-right">
   
   <div>
     {/* Header */}
