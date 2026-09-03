@@ -229,10 +229,10 @@ export default function VolunteerBanner() {
               
               <div className="text-center mb-6">
                 <span className="inline-block rounded-full bg-[var(--accent-gold)] px-3.5 py-1 text-[11px] font-black uppercase tracking-wider text-[#13382C] mb-2">
-                  Career with Us
+                 Job Opportunities
                 </span>
                 <h3 className="font-display text-xl sm:text-2xl font-bold text-white">
-                  Apply to Join As A Volunteer
+                  Career with Us
                 </h3>
                 <div className="w-12 h-1 bg-[var(--accent-gold)] my-2 rounded-full mx-auto" />
                 <p className="text-xs text-gray-200 leading-relaxed max-w-sm mx-auto">
