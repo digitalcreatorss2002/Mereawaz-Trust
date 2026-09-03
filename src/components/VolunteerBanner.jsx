@@ -125,103 +125,103 @@ export default function VolunteerBanner() {
         <div className="grid lg:grid-cols-12 items-stretch min-h-[600px] gap-8">
           
           {/* ================= LEFT COLUMN: OPEN PROCUREMENT (EOI/RFQ) ================= */}
-          <div className="lg:col-span-6 flex flex-col justify-between bg-[#0d1612] text-white rounded-[32px] p-6 sm:p-8 shadow-2xl border border-emerald-900/40 animate-fade-right">
-            
-            <div>
-              {/* Header */}
-              <div className="flex items-center justify-between pb-4 border-b border-emerald-800/40 mb-6">
-                <div className="flex items-center gap-3">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[var(--button-bg-color)] text-[var(--accent-gold)] text-lg shadow-sm">
-                    🌱
-                  </span>
-                  <div>
-                    <span className="text-[10px] font-black uppercase tracking-widest text-[var(--accent-gold)]">
-                      OFFICIAL NOTICE BOARD
-                    </span>
-                    <h3 className="font-display text-xl sm:text-2xl font-bold text-white leading-tight">
-                      Open Procurement (EOI/RFQ)
-                    </h3>
-                  </div>
-                </div>
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-950 px-3 py-1 text-[11px] font-bold text-emerald-400 border border-emerald-800/50">
-                  <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-                  Live Updates
+<div className="lg:col-span-6 flex flex-col justify-between bg-white text-slate-900 rounded-[32px] p-6 sm:p-8 shadow-xl shadow-emerald-950/5 border border-emerald-100 animate-fade-right">
+  
+  <div>
+    {/* Header */}
+    <div className="flex items-center justify-between pb-4 border-b border-emerald-100 mb-6">
+      <div className="flex items-center gap-3">
+        <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-800 text-lg shadow-sm border border-emerald-200/60">
+          🌱
+        </span>
+        <div>
+          <span className="text-[10px] font-black uppercase tracking-widest text-emerald-700">
+            OFFICIAL NOTICE BOARD
+          </span>
+          <h3 className="font-display text-xl sm:text-2xl font-bold text-slate-900 leading-tight">
+            Open Procurement (EOI/RFQ)
+          </h3>
+        </div>
+      </div>
+      <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1 text-[11px] font-bold text-emerald-700 border border-emerald-200/80 shadow-xs">
+        <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+        Live Updates
+      </span>
+    </div>
+
+    <p className="text-xs sm:text-sm text-slate-600 mb-6 leading-relaxed">
+      Active Expressions of Interest (EOI), Requests for Proposals (RFP), and Quotations (RFQ) for Meri Awaz Trust field programs.
+    </p>
+
+    {/* Procurement Notices List Container */}
+    <div className="bg-slate-50/80 border border-slate-200/80 rounded-2xl p-3 sm:p-4 min-h-[320px] max-h-[400px] flex flex-col justify-center overflow-hidden">
+      {!procurementLoaded ? (
+        <div className="py-12 text-center text-xs text-slate-500 font-mono animate-pulse">
+          Loading procurement notices...
+        </div>
+      ) : procurements.length === 0 ? (
+        <div className="py-12 text-center space-y-2">
+          <p className="text-sm font-serif italic text-slate-600">
+            No active procurement notices available at the moment.
+          </p>
+          <p className="text-xs text-slate-400">
+            Check back later or register as a volunteer below to stay updated.
+          </p>
+        </div>
+      ) : (
+        <div
+          ref={scrollRef}
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+          className="space-y-3 overflow-y-auto h-full pr-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden scroll-smooth"
+        >
+          {displayProcurements.map((item, idx) => (
+            <a
+              key={`${item.id}-${idx}`}
+              href={item.link || "#volunteer-form"}
+              onClick={(e) => handleProcurementClick(e, item.link)}
+              className="block p-4 rounded-xl bg-white hover:bg-emerald-50/40 border border-slate-200/90 hover:border-emerald-400/80 shadow-xs hover:shadow-md transition-all duration-200 group"
+            >
+              <div className="flex items-center justify-between gap-2 mb-2">
+                <span className="text-[10px] font-black uppercase tracking-wider bg-emerald-100 text-emerald-900 px-2.5 py-0.5 rounded-full border border-emerald-200/60 shadow-xs">
+                  {item.notice_type || "EOI/RFQ"}
+                </span>
+                <span className="text-[10px] text-slate-400 font-mono">
+                  {item.created_at ? new Date(item.created_at).toLocaleDateString("en-IN", { month: "short", day: "numeric", year: "numeric" }) : "Active"}
                 </span>
               </div>
-
-              <p className="text-xs sm:text-sm text-gray-300 mb-6 leading-relaxed">
-                Active Expressions of Interest (EOI), Requests for Proposals (RFP), and Quotations (RFQ) for Meri Awaz Trust field programs.
-              </p>
-
-              {/* Procurement Notices List Container */}
-              <div className="bg-[#070e0a] border border-emerald-950/90 rounded-2xl p-3 sm:p-4 min-h-[320px] max-h-[400px] flex flex-col justify-center overflow-hidden">
-                {!procurementLoaded ? (
-                  <div className="py-12 text-center text-xs text-gray-400 font-mono animate-pulse">
-                    Loading procurement notices...
-                  </div>
-                ) : procurements.length === 0 ? (
-                  <div className="py-12 text-center space-y-2">
-                    <p className="text-sm font-serif italic text-gray-400">
-                      No active procurement notices available at the moment.
-                    </p>
-                    <p className="text-xs text-gray-500">
-                      Check back later or register as a volunteer below to stay updated.
-                    </p>
-                  </div>
-                ) : (
-                  <div
-                    ref={scrollRef}
-                    onMouseEnter={() => setIsPaused(true)}
-                    onMouseLeave={() => setIsPaused(false)}
-                    className="space-y-3 overflow-y-auto h-full pr-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden scroll-smooth"
-                  >
-                    {displayProcurements.map((item, idx) => (
-                      <a
-                        key={`${item.id}-${idx}`}
-                        href={item.link || "#volunteer-form"}
-                        onClick={(e) => handleProcurementClick(e, item.link)}
-                        className="block p-4 rounded-xl bg-white/[0.04] hover:bg-emerald-900/40 border border-white/10 hover:border-emerald-500/50 transition-all duration-200 group"
-                      >
-                        <div className="flex items-center justify-between gap-2 mb-2">
-                          <span className="text-[10px] font-black uppercase tracking-wider bg-[var(--accent-gold)] text-[#13382C] px-2.5 py-0.5 rounded-full shadow-xs">
-                            {item.notice_type || "EOI/RFQ"}
-                          </span>
-                          <span className="text-[10px] text-gray-400 font-mono">
-                            {item.created_at ? new Date(item.created_at).toLocaleDateString("en-IN", { month: "short", day: "numeric", year: "numeric" }) : "Active"}
-                          </span>
-                        </div>
-                        <h4 className="text-xs sm:text-sm font-bold text-gray-100 group-hover:text-[var(--accent-gold)] transition-colors leading-snug">
-                          {item.title}
-                        </h4>
-                        {item.description && (
-                          <p className="text-xs text-gray-400 mt-1.5 line-clamp-3 font-normal leading-relaxed">
-                            {item.description}
-                          </p>
-                        )}
-                        <div className="mt-3 flex items-center gap-1.5 text-xs font-extrabold text-[var(--accent-gold)] group-hover:underline">
-                          <span>Apply / Contact via Volunteer Form</span>
-                          <FiArrowRight className="text-xs transition-transform group-hover:translate-x-1" />
-                        </div>
-                      </a>
-                    ))}
-                  </div>
-                )}
+              <h4 className="text-xs sm:text-sm font-bold text-slate-800 group-hover:text-emerald-700 transition-colors leading-snug">
+                {item.title}
+              </h4>
+              {item.description && (
+                <p className="text-xs text-slate-600 mt-1.5 line-clamp-3 font-normal leading-relaxed">
+                  {item.description}
+                </p>
+              )}
+              <div className="mt-3 flex items-center gap-1.5 text-xs font-extrabold text-emerald-700 group-hover:text-emerald-800 group-hover:underline">
+                <span>Apply / Contact via Volunteer Form</span>
+                <FiArrowRight className="text-xs transition-transform group-hover:translate-x-1 text-emerald-700" />
               </div>
-            </div>
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  </div>
 
-            {/* Footer */}
-            <div className="pt-4 border-t border-emerald-900/50 flex flex-wrap items-center justify-between gap-2 text-xs text-gray-400">
-              <span>Have a procurement inquiry?</span>
-              <a
-                href="#volunteer-form"
-                onClick={(e) => handleProcurementClick(e, "#volunteer-form")}
-                className="text-[var(--accent-gold)] font-extrabold hover:underline flex items-center gap-1"
-              >
-                <span>Submit Application Below &rarr;</span>
-              </a>
-            </div>
+  {/* Footer */}
+  <div className="pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500">
+    <span>Have a procurement inquiry?</span>
+    <a
+      href="#volunteer-form"
+      onClick={(e) => handleProcurementClick(e, "#volunteer-form")}
+      className="text-emerald-700 font-extrabold hover:text-emerald-900 hover:underline flex items-center gap-1"
+    >
+      <span>Submit Application Below &rarr;</span>
+    </a>
+  </div>
 
-          </div>
+</div>
 
           {/* ================= RIGHT COLUMN: VOLUNTEER FORM ================= */}
           <div className="lg:col-span-6 w-full flex items-center justify-center animate-fade-left">
