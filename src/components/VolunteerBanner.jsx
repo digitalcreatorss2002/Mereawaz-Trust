@@ -233,7 +233,7 @@ export default function VolunteerBanner() {
                 </h3>
                 <div className="w-12 h-1 bg-[var(--accent-gold)] my-2 rounded-full mx-auto" />
                 <p className="text-xs text-gray-200 leading-relaxed max-w-sm mx-auto">
-                  Fill in your details below to register as a volunteer with Meri Awaz Trust.
+                  Fill in your details below to apply for career opportunities with Meri Awaz Trust.
                 </p>
               </div>
 
