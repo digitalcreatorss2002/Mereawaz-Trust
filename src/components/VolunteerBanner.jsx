@@ -6,13 +6,10 @@ import { api, extractData } from "../api.js";
 import SubmissionAlert from "./SubmissionAlert.jsx";
 
 const SKILL_OPTIONS = [
-  "General Volunteer",
-  "Education & Teaching",
-  "Healthcare & Medical Assistance",
-  "IT, Web & Technology",
-  "Social Media & Content Creation",
-  "Event Management & Field Operations",
-  "Fundraising & Community Outreach",
+  "Program Manager",
+  "Program Officer",
+  "Field Officer",
+  "Monitoring & Evaluation",
   "Other",
 ];
 
