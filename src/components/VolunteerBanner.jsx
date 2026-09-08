@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { FaCheckCircle, FaUser, FaEnvelope, FaPhoneAlt, FaPaperPlane, FaFilePdf } from "react-icons/fa";
+import { FaCheckCircle, FaUser, FaEnvelope, FaPhoneAlt, FaPaperPlane, FaFilePdf, FaFileUpload, FaTimesCircle } from "react-icons/fa";
 import { FiArrowRight } from "react-icons/fi";
 import { api, extractData } from "../api.js";
 import SubmissionAlert from "./SubmissionAlert.jsx";
@@ -19,9 +19,12 @@ export default function VolunteerBanner() {
     email: "",
     phone: "",
     address: "",
-    skills: "General Volunteer",
+    skills: "Program Manager",
     message: "",
   });
+
+  const [resumeFile, setResumeFile] = useState(null);
+  const fileInputRef = useRef(null);
 
   const [status, setStatus] = useState("idle");
   const [showAlert, setShowAlert] = useState(false);
@@ -71,13 +74,51 @@ export default function VolunteerBanner() {
   const update = (key) => (e) =>
     setForm((f) => ({ ...f, [key]: e.target.value }));
 
+  const handleFileChange = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (file.size > 10 * 1024 * 1024) {
+      setError("Resume file size must be less than 10MB.");
+      return;
+    }
+
+    const validExtensions = ["pdf", "doc", "docx"];
+    const ext = file.name.split(".").pop().toLowerCase();
+    if (!validExtensions.includes(ext)) {
+      setError("Please upload a valid PDF, DOC, or DOCX document.");
+      return;
+    }
+
+    setError("");
+    setResumeFile(file);
+  };
+
+  const removeFile = () => {
+    setResumeFile(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus("sending");
     setError("");
 
     try {
-      await api.post("/volunteer.php", form);
+      const formData = new FormData();
+      formData.append("name", form.name);
+      formData.append("email", form.email);
+      formData.append("phone", form.phone);
+      formData.append("address", form.address || "");
+      formData.append("skills", form.skills);
+      formData.append("message", form.message);
+      if (resumeFile) {
+        formData.append("resume", resumeFile);
+      }
+
+      await api.post("/volunteer.php", formData);
       setStatus("sent");
       setShowAlert(true);
       setForm({
@@ -85,9 +126,10 @@ export default function VolunteerBanner() {
         email: "",
         phone: "",
         address: "",
-        skills: "General Volunteer",
+        skills: "Program Manager",
         message: "",
       });
+      removeFile();
     } catch (err) {
       setStatus("error");
       setError(err.message || "Failed to submit application. Please try again.");
@@ -334,6 +376,48 @@ export default function VolunteerBanner() {
                       placeholder="Tell us briefly about your interest or availability..."
                       className="w-full rounded-xl border border-white/20 bg-white/10 p-3 text-xs text-white placeholder-gray-300 focus:outline-none focus:border-[var(--accent-gold)] focus:bg-white/20 transition-all"
                     />
+                  </div>
+
+                  {/* Attach Resume / CV */}
+                  <div>
+                    <div className="flex items-center justify-between mb-1">
+                      <label className="block text-[11px] font-bold uppercase tracking-wider text-gray-200">
+                        Attach Resume / CV
+                      </label>
+                      <span className="text-[10px] text-gray-300 font-mono">PDF, DOC, DOCX (Max 10MB)</span>
+                    </div>
+
+                    {!resumeFile ? (
+                      <label className="flex items-center justify-center gap-2.5 w-full py-2.5 px-4 rounded-xl border-2 border-dashed border-white/30 hover:border-[var(--accent-gold)] bg-white/5 hover:bg-white/10 cursor-pointer transition-all duration-200 text-xs text-gray-200 group">
+                        <FaFileUpload className="text-sm text-[var(--accent-gold)] group-hover:scale-110 transition-transform" />
+                        <span className="font-semibold group-hover:text-white">Click to upload your resume</span>
+                        <input
+                          ref={fileInputRef}
+                          type="file"
+                          accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                          onChange={handleFileChange}
+                          className="hidden"
+                        />
+                      </label>
+                    ) : (
+                      <div className="flex items-center justify-between gap-2 p-2.5 rounded-xl border border-[var(--accent-gold)]/70 bg-white/15 backdrop-blur-sm">
+                        <div className="flex items-center gap-2.5 overflow-hidden">
+                          <FaFilePdf className="text-red-400 text-base shrink-0" />
+                          <div className="overflow-hidden">
+                            <p className="text-xs font-bold text-white truncate max-w-[200px] sm:max-w-[250px]">{resumeFile.name}</p>
+                            <p className="text-[10px] text-gray-300">{(resumeFile.size / 1024).toFixed(1)} KB</p>
+                          </div>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={removeFile}
+                          className="p-1 text-gray-300 hover:text-red-400 hover:scale-110 transition-all shrink-0"
+                          title="Remove file"
+                        >
+                          <FaTimesCircle className="text-base" />
+                        </button>
+                      </div>
+                    )}
                   </div>
 
                   {status === "error" && (
