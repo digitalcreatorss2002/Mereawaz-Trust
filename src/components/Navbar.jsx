@@ -71,11 +71,11 @@ export default function Navbar() {
           <div className="flex items-center gap-8">
             <a href="tel:+919266749755" className="flex items-center gap-2.5 hover:text-[var(--primary-color)] transition-colors">
               <FaPhoneAlt className="text-[var(--primary-color)] text-sm" />
-              <span className="font-semibold">+91 92667 49755</span>
+              <span className="font-semibold">+91 8800902890</span>
             </a>
             <a href="mailto:info@meriawaztrust.org" className="flex items-center gap-2.5 hover:text-[var(--primary-color)] transition-colors">
               <FaEnvelope className="text-[var(--primary-color)] text-sm" />
-              <span className="font-semibold">info@meriawaztrust.org</span>
+              <span className="font-semibold">info@meriawaz.org</span>
             </a>
             <div className="flex items-center gap-2.5 text-white/80">
               <FaMapMarkerAlt className="text-[var(--primary-color)] text-sm" />
