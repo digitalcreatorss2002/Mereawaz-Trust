@@ -69,7 +69,7 @@ export default function Navbar() {
         <div className="container-page flex items-center justify-between">
           {/* Contact Details */}
           <div className="flex items-center gap-8">
-            <a href="tel:+919266749755" className="flex items-center gap-2.5 hover:text-[var(--primary-color)] transition-colors">
+            <a href="tel:+918800902890" className="flex items-center gap-2.5 hover:text-[var(--primary-color)] transition-colors">
               <FaPhoneAlt className="text-[var(--primary-color)] text-sm" />
               <span className="font-semibold">+91 8800902890</span>
             </a>
@@ -86,16 +86,16 @@ export default function Navbar() {
           {/* Social Icons & Quick Info */}
           <div className="flex items-center gap-5">
             <span className="text-white/70 font-semibold me-1">Follow Us:</span>
-            <a href="https://facebook.com" target="_blank" rel="noreferrer" className="hover:text-[var(--primary-color)] transition-transform hover:scale-110 text-sm" aria-label="Facebook">
+            <a href="https://www.facebook.com/share/1HYn19ckcY/?mibextid=wwXIfr" target="_blank" rel="noreferrer" className="hover:text-[var(--primary-color)] transition-transform hover:scale-110 text-sm" aria-label="Facebook">
               <FaFacebookF />
             </a>
-            <a href="https://instagram.com" target="_blank" rel="noreferrer" className="hover:text-[var(--primary-color)] transition-transform hover:scale-110 text-sm" aria-label="Instagram">
+            <a href="https://www.instagram.com/mat_meriawaztrust/" target="_blank" rel="noreferrer" className="hover:text-[var(--primary-color)] transition-transform hover:scale-110 text-sm" aria-label="Instagram">
               <FaInstagram />
             </a>
-            <a href="https://wa.me/919266749755" target="_blank" rel="noreferrer" className="hover:text-[var(--primary-color)] transition-transform hover:scale-110 text-sm" aria-label="WhatsApp">
+            <a href="https://wa.me/918800902890" target="_blank" rel="noreferrer" className="hover:text-[var(--primary-color)] transition-transform hover:scale-110 text-sm" aria-label="WhatsApp">
               <FaWhatsapp />
             </a>
-            <a href="https://youtube.com" target="_blank" rel="noreferrer" className="hover:text-[var(--primary-color)] transition-transform hover:scale-110 text-sm" aria-label="YouTube">
+            <a href="www.youtube.com/@MeriAwazTrust" target="_blank" rel="noreferrer" className="hover:text-[var(--primary-color)] transition-transform hover:scale-110 text-sm" aria-label="YouTube">
               <FaYoutube />
             </a>
           </div>
