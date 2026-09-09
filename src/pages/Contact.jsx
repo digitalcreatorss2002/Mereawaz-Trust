@@ -54,7 +54,7 @@ export default function Contact() {
               <h3 className="font-display text-lg font-bold text-gray-900 mb-1">Call Us Direct</h3>
               <p className="text-xs text-gray-500 mb-3">Mon - Sat: 9:00 AM - 6:00 PM</p>
               <a href="tel:+919266749755" className="font-bold text-sm text-[var(--button-bg-color)] hover:underline block">
-                +91 92667 49755
+                +91 8800902890
               </a>
             </div>
 
@@ -65,7 +65,7 @@ export default function Contact() {
               </div>
               <h3 className="font-display text-lg font-bold text-gray-900 mb-1">Email Inquiry</h3>
               <p className="text-xs text-gray-500 mb-3">For general &amp; donor queries</p>
-              <a href="mailto:info@meriawaztrust.org" className="font-bold text-sm text-[var(--button-bg-color)] hover:underline block">
+              <a href="mailto:info@meriawaz.org" className="font-bold text-sm text-[var(--button-bg-color)] hover:underline block">
                 info@meriawaztrust.org
               </a>
             </div>
@@ -138,7 +138,7 @@ export default function Contact() {
                       <input
                         value={form.phone}
                         onChange={update("phone")}
-                        placeholder="+91 98765 43210"
+                        placeholder="+91 8800902890"
                         className="w-full rounded-2xl border border-gray-200 px-4 py-3 text-sm focus:border-[var(--button-bg-color)] focus:outline-none"
                       />
                     </div>
