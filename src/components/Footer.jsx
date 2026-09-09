@@ -81,16 +81,16 @@ export default function Footer() {
               Every voice deserves to be heard. We are a registered non-profit trust dedicated to empowering rural India through education, healthcare, sustainable agriculture, and clean energy.
             </p>
             <div className="flex items-center gap-3 pt-2">
-              <a href="https://facebook.com" target="_blank" rel="noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--accent-gold)] text-[var(--text-color)] transition-all hover:bg-[var(--text-color-light)] hover:scale-110" aria-label="Facebook">
+              <a href="https://www.facebook.com/share/1HYn19ckcY/?mibextid=wwXIfr" target="_blank" rel="noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--accent-gold)] text-[var(--text-color)] transition-all hover:bg-[var(--text-color-light)] hover:scale-110" aria-label="Facebook">
                 <FaFacebookF />
               </a>
-              <a href="https://instagram.com" target="_blank" rel="noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--accent-gold)] text-[var(--text-color)] transition-all hover:bg-[var(--text-color-light)] hover:scale-110" aria-label="Instagram">
+              <a href="https://www.instagram.com/mat_meriawaztrust/" target="_blank" rel="noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--accent-gold)] text-[var(--text-color)] transition-all hover:bg-[var(--text-color-light)] hover:scale-110" aria-label="Instagram">
                 <FaInstagram />
               </a>
-              <a href="https://wa.me/919266749755" target="_blank" rel="noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--accent-gold)] text-[var(--text-color)] transition-all hover:bg-[var(--text-color-light)] hover:scale-110" aria-label="WhatsApp">
+              <a href="https://wa.me/918800902890" target="_blank" rel="noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--accent-gold)] text-[var(--text-color)] transition-all hover:bg-[var(--text-color-light)] hover:scale-110" aria-label="WhatsApp">
                 <FaWhatsapp />
               </a>
-              <a href="https://youtube.com" target="_blank" rel="noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--accent-gold)] text-[var(--text-color)] transition-all hover:bg-[var(--text-color-light)] hover:scale-110" aria-label="YouTube">
+              <a href="www.youtube.com/@MeriAwazTrust" target="_blank" rel="noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--accent-gold)] text-[var(--text-color)] transition-all hover:bg-[var(--text-color-light)] hover:scale-110" aria-label="YouTube">
                 <FaYoutube />
               </a>
             </div>
@@ -192,11 +192,11 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <FaPhoneAlt className="text-[var(--primary-color)] shrink-0" />
-                <a href="tel:+919266749755" className="hover:text-white transition-colors">+91 92667 49755</a>
+                <a href="tel:+918800902890" className="hover:text-white transition-colors">+91 8800902890</a>
               </li>
               <li className="flex items-center gap-3">
                 <FaEnvelope className="text-[var(--primary-color)] shrink-0" />
-                <a href="mailto:info@meriawaztrust.org" className="hover:text-white transition-colors">info@meriawaztrust.org</a>
+                <a href="mailto:info@meriawaz.org" className="hover:text-white transition-colors">info@meriawaz.org</a>
               </li>
             </ul>
             <div className="pt-2">
