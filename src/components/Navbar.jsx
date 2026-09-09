@@ -64,7 +64,7 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 w-full transition-all duration-300">
-      {/* TOP HEADER BAR (Aasha NGO Style - Increased Size) */}
+      {/* TOP HEADER BAR */}
       <div className="hidden bg-[var(--button-bg-color)] text-white/95 text-sm py-3 px-4 sm:block border-b border-white/10 font-medium">
         <div className="container-page flex items-center justify-between">
           {/* Contact Details */}
@@ -86,22 +86,22 @@ export default function Navbar() {
           {/* Social Icons & Quick Info */}
           <div className="flex items-center gap-5">
             <span className="text-white/70 font-semibold me-1">Follow Us:</span>
-            <a href="https://www.facebook.com/share/1HYn19ckcY/?mibextid=wwXIfr" target="_blank" rel="noreferrer" className="hover:text-[var(--primary-color)] transition-transform hover:scale-110 text-sm" aria-label="Facebook">
+            <a href="https://www.facebook.com/share/1HYn19ckcY/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--primary-color)] transition-transform hover:scale-110 text-sm" aria-label="Facebook">
               <FaFacebookF />
             </a>
-            <a href="https://www.instagram.com/mat_meriawaztrust/" target="_blank" rel="noreferrer" className="hover:text-[var(--primary-color)] transition-transform hover:scale-110 text-sm" aria-label="Instagram">
+            <a href="https://www.instagram.com/mat_meriawaztrust/" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--primary-color)] transition-transform hover:scale-110 text-sm" aria-label="Instagram">
               <FaInstagram />
             </a>
-            <a href="https://wa.me/918800902890" target="_blank" rel="noreferrer" className="hover:text-[var(--primary-color)] transition-transform hover:scale-110 text-sm" aria-label="WhatsApp">
+            <a href="https://wa.me/918800902890" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--primary-color)] transition-transform hover:scale-110 text-sm" aria-label="WhatsApp">
               <FaWhatsapp />
             </a>
-            <a href="www.youtube.com/@MeriAwazTrust" target="_blank" rel="noreferrer" className="hover:text-[var(--primary-color)] transition-transform hover:scale-110 text-sm" aria-label="YouTube">
+            {/* ✅ Fix: https:// जोड़ा गया */}
+            <a href="https://www.youtube.com/@MeriAwazTrust" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--primary-color)] transition-transform hover:scale-110 text-sm" aria-label="YouTube">
               <FaYoutube />
             </a>
           </div>
         </div>
       </div>
-
 
       {/* MAIN NAVIGATION BAR */}
       <div className={`transition-all duration-300 ${
@@ -195,14 +195,18 @@ export default function Navbar() {
 
                 {/* Mobile Social Links */}
                 <div className="flex items-center justify-center gap-6 pt-2 text-gray-600">
-                  <a href="https://facebook.com" target="_blank" rel="noreferrer" aria-label="Facebook">
+                  <a href="https://www.facebook.com/share/1HYn19ckcY/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                     <FaFacebookF className="h-5 w-5 hover:text-[var(--button-bg-color)]" />
                   </a>
-                  <a href="https://instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram">
+                  <a href="https://www.instagram.com/mat_meriawaztrust/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                     <FaInstagram className="h-5 w-5 hover:text-[var(--button-bg-color)]" />
                   </a>
-                  <a href="https://wa.me/919266749755" target="_blank" rel="noreferrer" aria-label="WhatsApp">
+                  <a href="https://wa.me/918800902890" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
                     <FaWhatsapp className="h-5 w-5 hover:text-[var(--button-bg-color)]" />
+                  </a>
+                  {/* ✅ Mobile drawer me bhi YouTube add kar diya */}
+                  <a href="https://www.youtube.com/@MeriAwazTrust" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+                    <FaYoutube className="h-5 w-5 hover:text-[var(--button-bg-color)]" />
                   </a>
                 </div>
               </div>
