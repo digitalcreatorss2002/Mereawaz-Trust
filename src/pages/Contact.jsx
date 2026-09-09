@@ -180,7 +180,7 @@ export default function Contact() {
                 <h3 className="font-display text-lg font-bold text-gray-900 mb-3">WhatsApp Quick Connect</h3>
                 <p className="text-xs text-gray-600 mb-4">Chat directly with our team on WhatsApp for quick inquiries.</p>
                 <a
-                  href="https://wa.me/919266749755"
+                  href="https://wa.me/918800902890"
                   target="_blank"
                   rel="noreferrer"
                   className="inline-flex items-center gap-2 rounded-full bg-green-600 px-6 py-2.5 text-xs font-bold text-white shadow-md hover:bg-green-700 transition-colors"
