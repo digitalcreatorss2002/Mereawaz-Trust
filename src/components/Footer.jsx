@@ -68,10 +68,10 @@ export default function Footer() {
             <Link to="/" className="flex items-center gap-3">
               <div className="rounded-xl bg-white p-1 shadow-sm border border-white/20">
                 <img
-                src="/logo.png"
-                alt="Meri Awaz Trust Logo"
-                className="h-12 w-auto object-contain sm:h-14"
-              />
+                  src="/logo.png"
+                  alt="Meri Awaz Trust Logo"
+                  className="h-12 w-auto object-contain sm:h-14"
+                />
               </div>
               <span className="font-display text-xl font-extrabold text-white">
                 Meri Awaz <span className="text-[var(--primary-color)]">Trust</span>
@@ -81,16 +81,17 @@ export default function Footer() {
               Every voice deserves to be heard. We are a registered non-profit trust dedicated to empowering rural India through education, healthcare, sustainable agriculture, and clean energy.
             </p>
             <div className="flex items-center gap-3 pt-2">
-              <a href="https://www.facebook.com/share/1HYn19ckcY/?mibextid=wwXIfr" target="_blank" rel="noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--accent-gold)] text-[var(--text-color)] transition-all hover:bg-[var(--text-color-light)] hover:scale-110" aria-label="Facebook">
+              <a href="https://www.facebook.com/share/1HYn19ckcY/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--accent-gold)] text-[var(--text-color)] transition-all hover:bg-[var(--text-color-light)] hover:scale-110" aria-label="Facebook">
                 <FaFacebookF />
               </a>
-              <a href="https://www.instagram.com/mat_meriawaztrust/" target="_blank" rel="noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--accent-gold)] text-[var(--text-color)] transition-all hover:bg-[var(--text-color-light)] hover:scale-110" aria-label="Instagram">
+              <a href="https://www.instagram.com/mat_meriawaztrust/" target="_blank" rel="noopener noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--accent-gold)] text-[var(--text-color)] transition-all hover:bg-[var(--text-color-light)] hover:scale-110" aria-label="Instagram">
                 <FaInstagram />
               </a>
-              <a href="https://wa.me/918800902890" target="_blank" rel="noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--accent-gold)] text-[var(--text-color)] transition-all hover:bg-[var(--text-color-light)] hover:scale-110" aria-label="WhatsApp">
+              <a href="https://wa.me/918800902890" target="_blank" rel="noopener noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--accent-gold)] text-[var(--text-color)] transition-all hover:bg-[var(--text-color-light)] hover:scale-110" aria-label="WhatsApp">
                 <FaWhatsapp />
               </a>
-              <a href="www.youtube.com/@MeriAwazTrust" target="_blank" rel="noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--accent-gold)] text-[var(--text-color)] transition-all hover:bg-[var(--text-color-light)] hover:scale-110" aria-label="YouTube">
+              {/* ✅ Fix: https:// जोड़ा गया */}
+              <a href="https://www.youtube.com/@MeriAwazTrust" target="_blank" rel="noopener noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--accent-gold)] text-[var(--text-color)] transition-all hover:bg-[var(--text-color-light)] hover:scale-110" aria-label="YouTube">
                 <FaYoutube />
               </a>
             </div>
@@ -140,7 +141,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* COLUMN 3: OUR CORE FOCUS (DYNAMIC FROM BACKEND) */}
+          {/* COLUMN 3: OUR CORE FOCUS */}
           <div className="lg:col-span-3 space-y-4">
             <h4 className="font-display text-lg font-bold text-[var(--text-color-light)] border-b border-[var(--button-bg-color)] pb-2 inline-block">
               Our Core Focus
@@ -215,7 +216,16 @@ export default function Footer() {
         <div className="pt-6 text-center text-xs text-white/60 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p>© {new Date().getFullYear()} Meri Awaz Trust. All rights reserved.</p>
           <p>
-            Designed &amp; Developed By <FaHeart className="inline text-red-500 mx-1" /> <span className="hover:text-[var(--text-color-light)] transition-colors"><Link to="https://digitalcreatorss.com/">Digital Creatorss</Link></span>
+            {/* ✅ Fix: External link ke liye <a> tag aur rel="noopener noreferrer" lagaya */}
+            Designed &amp; Developed By <FaHeart className="inline text-red-500 mx-1" />{' '}
+            <a
+              href="https://digitalcreatorss.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white underline transition-colors"
+            >
+              Digital Creatorss
+            </a>
           </p>
         </div>
       </div>
