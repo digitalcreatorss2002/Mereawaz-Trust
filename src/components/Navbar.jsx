@@ -51,10 +51,10 @@ export default function Navbar() {
   }, [open])
 
   const linkClass = ({ isActive }) =>
-    `relative text-xs xl:text-sm font-semibold tracking-tight xl:tracking-wide transition-all duration-300 py-1.5 px-2.5 xl:px-3 rounded-full whitespace-nowrap ${
+    `relative text-[13px] xl:text-[14px] font-semibold tracking-normal transition-all duration-200 py-1.5 px-3 xl:px-3.5 rounded-full whitespace-nowrap ${
       isActive
         ? 'text-white bg-[var(--button-bg-color)] shadow-sm'
-        : 'text-gray-800 hover:text-[var(--button-bg-color)] hover:bg-black/5'
+        : 'text-gray-700 hover:text-[var(--button-bg-color)] hover:bg-black/5'
     }`
 
   const mobileLinkClass = ({ isActive }) =>
@@ -67,8 +67,8 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 w-full transition-all duration-300">
       {/* TOP HEADER BAR */}
-      <div className="hidden bg-[var(--button-bg-color)] text-white/95 text-sm py-3 px-4 sm:block border-b border-white/10 font-medium">
-        <div className="container-page flex items-center justify-between">
+      <div className="hidden bg-[var(--button-bg-color)] text-white/95 text-sm py-2.5 px-4 sm:block border-b border-white/10 font-medium">
+        <div className="w-full max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 flex items-center justify-between">
           {/* Contact Details */}
           <div className="flex items-center gap-8">
             <a href="tel:+918800902890" className="flex items-center gap-2.5 hover:text-[var(--primary-color)] transition-colors">
@@ -111,9 +111,9 @@ export default function Navbar() {
           ? 'bg-white/95 backdrop-blur-md shadow-aasha py-3 border-b border-gray-100' 
           : 'bg-[var(--text-color-light)] py-4 border-b border-black/5'
       }`}>
-        <div className="container-page flex items-center justify-between">
+        <div className="w-full max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 flex items-center justify-between gap-4 xl:gap-8">
           {/* BRAND LOGO */}
-          <NavLink to="/" className="flex items-center gap-3 group">
+          <NavLink to="/" className="flex items-center gap-3 group shrink-0">
             <div className="relative overflow-hidden rounded-xl p-1 bg-white shadow-sm border border-black/5 transition-transform duration-300 group-hover:scale-105">
               <img
                 src="/logo.png"
@@ -132,7 +132,7 @@ export default function Navbar() {
           </NavLink>
 
           {/* DESKTOP NAV LINKS */}
-          <nav className="hidden items-center gap-1 xl:gap-2.5 lg:flex bg-white/50 backdrop-blur px-2.5 xl:px-4 py-1.5 rounded-full border border-black/5 shadow-inner">
+          <nav className="hidden items-center gap-1 xl:gap-2 lg:flex bg-stone-100/80 backdrop-blur px-3 xl:px-4 py-1.5 rounded-full border border-stone-200/80 shadow-inner">
             {links.map((l) => (
               <NavLink key={l.to} to={l.to} className={linkClass} end={l.to === '/'}>
                 {l.label}
@@ -144,7 +144,7 @@ export default function Navbar() {
           <div className="hidden shrink-0 items-center lg:flex">
             <NavLink
               to="/donate"
-              className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-[var(--button-bg-color)] px-5 xl:px-6 py-2.5 text-xs xl:text-sm font-bold text-white shadow-md transition-all duration-300 hover:bg-[var(--button-hover-color)] hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0"
+              className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-[var(--button-bg-color)] px-6 py-2.5 text-xs xl:text-sm font-bold text-white shadow-md transition-all duration-300 hover:bg-[var(--button-hover-color)] hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0"
             >
               <FaHeart className="text-pink-300 transition-transform duration-300 group-hover:scale-125 group-hover:text-red-300" />
               <span>Donate Now</span>
