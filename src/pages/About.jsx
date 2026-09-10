@@ -77,40 +77,22 @@ export default function About() {
             </h2>
           </div>
 
-          <div className="grid gap-8 md:grid-cols-2 items-stretch">
+          <div className="grid gap-8 md:grid-cols-2 items-center">
             {/* Mission Card */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="overflow-hidden rounded-3xl bg-white border border-gray-100 shadow-aasha flex flex-col"
+              className="overflow-hidden rounded-3xl bg-white border border-gray-100 shadow-aasha hover:shadow-xl transition-all duration-300"
             >
-              {/* Increased Height Image Container */}
-              <div className="w-full h-80 sm:h-[450px] md:h-[500px] overflow-hidden bg-gray-100 relative">
-                <img
-                  src={
-                    getImageUrl(missionData?.mission?.image_url) ||
-                    "/hero-banner.jpg"
-                  }
-                  alt="Our Mission"
-                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-                />
-              </div>
-
-              <div className="p-8 flex-1 flex flex-col justify-between">
-                <div>
-                  <span className="inline-block rounded-full bg-[var(--accent-gold)] px-3 py-1 text-xs font-bold text-[var(--button-bg-color)] mb-3">
-                    CORE TARGET &amp; GOAL
-                  </span>
-                  <h3 className="font-display text-2xl font-bold text-[var(--text-color)] mb-3">
-                    {missionData?.mission?.title || "Our Mission"}
-                  </h3>
-                  <p className="text-sm text-[var(--text-color)] leading-relaxed">
-                    {missionData?.mission?.description ||
-                      "To empower rural communities across India by expanding access to digital education, clean solar power, rural healthcare, and technology-driven agricultural practices."}
-                  </p>
-                </div>
-              </div>
+              <img
+                src={
+                  getImageUrl(missionData?.mission?.image_url) ||
+                  "/hero-banner.jpg"
+                }
+                alt="Our Mission"
+                className="w-full h-auto block rounded-3xl object-contain transition-transform duration-500 hover:scale-[1.02]"
+              />
             </motion.div>
 
             {/* Vision Card */}
@@ -119,34 +101,16 @@ export default function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.15 }}
-              className="overflow-hidden rounded-3xl bg-white border border-gray-100 shadow-aasha flex flex-col"
+              className="overflow-hidden rounded-3xl bg-white border border-gray-100 shadow-aasha hover:shadow-xl transition-all duration-300"
             >
-              {/* Increased Height Image Container */}
-              <div className="w-full h-80 sm:h-[450px] md:h-[500px] overflow-hidden bg-gray-100 relative">
-                <img
-                  src={
-                    getImageUrl(missionData?.vision?.image_url) ||
-                    "/about-banner.jpg"
-                  }
-                  alt="Our Vision"
-                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-                />
-              </div>
-
-              <div className="p-8 flex-1 flex flex-col justify-between">
-                <div>
-                  <span className="inline-block rounded-full bg-[var(--accent-gold)] px-3 py-1 text-xs font-bold text-[var(--button-bg-color)] mb-3">
-                    FUTURE OUTLOOK
-                  </span>
-                  <h3 className="font-display text-2xl font-bold text-[var(--text-color)] mb-3">
-                    {missionData?.vision?.title || "Our Vision"}
-                  </h3>
-                  <p className="text-sm text-[var(--text-color)] leading-relaxed">
-                    {missionData?.vision?.description ||
-                      "A self-sustaining rural India where every family thrives with dignity, clean energy, quality healthcare, education, and sustainable economic opportunities."}
-                  </p>
-                </div>
-              </div>
+              <img
+                src={
+                  getImageUrl(missionData?.vision?.image_url) ||
+                  "/about-banner.jpg"
+                }
+                alt="Our Vision"
+                className="w-full h-auto block rounded-3xl object-contain transition-transform duration-500 hover:scale-[1.02]"
+              />
             </motion.div>
           </div>
         </div>
