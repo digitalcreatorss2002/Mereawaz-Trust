@@ -1,8 +1,28 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FaArrowRight, FaPhoneAlt, FaBullseye, FaUsers, FaSeedling } from "react-icons/fa";
+import { api, getImageUrl } from "../api.js";
 
 export default function WhyChooseUs() {
+  const [images, setImages] = useState({
+    main: "/vision.jpg",
+    secondary: "/hero-banner.jpg",
+  });
+
+  useEffect(() => {
+    api
+      .get("/why_choose_us.php")
+      .then((res) => {
+        if (res?.data) {
+          setImages({
+            main: res.data.main || "/vision.jpg",
+            secondary: res.data.secondary || "/hero-banner.jpg",
+          });
+        }
+      })
+      .catch(() => {});
+  }, []);
+
   const points = [
     {
       icon: FaBullseye,
@@ -77,7 +97,7 @@ export default function WhyChooseUs() {
               {/* Main Tall Image */}
               <div className="overflow-hidden rounded-3xl shadow-aasha-lg border-4 border-white bg-[var(--primary-color)] sm:w-[540px] h-[400px] sm:h-[550px]">
                 <img
-                  src="/vision.jpg"
+                  src={getImageUrl(images.main) || "/vision.jpg"}
                   alt="What Makes Our Impact Strong"
                   className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
                 />
@@ -86,7 +106,7 @@ export default function WhyChooseUs() {
               {/* Overlapping Bottom-Left Image */}
               <div className="absolute -bottom-20 -left-6 z-10 hidden sm:block w-52 sm:w-64 h-56 sm:h-60 overflow-hidden rounded-2xl border-4 border-white shadow-aasha-lg bg-gray-100">
                 <img
-                  src="/hero-banner.jpg"
+                  src={getImageUrl(images.secondary) || "/hero-banner.jpg"}
                   alt="Rural Community Action"
                   className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                 />
@@ -102,10 +122,10 @@ export default function WhyChooseUs() {
                     Call Us
                   </span>
                   <a
-                    href="tel:+919709544166"
+                    href="tel:+918800902890"
                     className="text-[14px] font-black hover:text-[var(--accent-gold)] transition-colors"
                   >
-                    +91 97095 44166
+                    +91 88009 02890
                   </a>
                 </div>
               </div>
