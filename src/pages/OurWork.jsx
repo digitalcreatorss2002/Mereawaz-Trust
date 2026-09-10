@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react'
 import { Link } from 'react-router-dom'
-import { FaMapMarkerAlt, FaFilter, FaSearch, FaTimes, FaCheck, FaHandsHelping } from 'react-icons/fa'
+import { FaMapMarkerAlt, FaFilter, FaSearch, FaTimes, FaCheck, FaHandsHelping, FaUsers } from 'react-icons/fa'
 import { FiArrowUpRight } from 'react-icons/fi'
 import PageHeader from '../components/PageHeader.jsx'
 import Loader from '../components/Loader.jsx'
@@ -37,7 +37,7 @@ export default function OurWork() {
   useEffect(() => {
     setLoading(true)
     api
-      .get('/properties.php')
+      .get('/projects.php')
       .then((res) => {
         setItems(extractData(res))
         setLoading(false)
@@ -58,8 +58,9 @@ export default function OurWork() {
   const sectorOptions = useMemo(() => {
     const list = new Set(DEFAULT_SECTORS)
     items.forEach((p) => {
-      if (p.category) {
-        list.add(p.category.trim())
+      const sec = p.sector || p.category
+      if (sec) {
+        list.add(sec.trim())
       }
     })
     return Array.from(list)
@@ -76,7 +77,7 @@ export default function OurWork() {
 
       // 2. Sector Filter
       if (sectorFilter !== 'All Sectors') {
-        const cat = (p.category || '').toLowerCase()
+        const cat = (p.sector || p.category || '').toLowerCase()
         if (cat !== sectorFilter.toLowerCase()) {
           return false
         }
@@ -86,10 +87,11 @@ export default function OurWork() {
       if (searchQuery.trim()) {
         const q = searchQuery.toLowerCase()
         const titleMatch = (p.title || '').toLowerCase().includes(q)
-        const locationMatch = (p.location || '').toLowerCase().includes(q)
+        const locationMatch = (p.locations || p.location || '').toLowerCase().includes(q)
         const summaryMatch = (p.summary || '').toLowerCase().includes(q)
-        const categoryMatch = (p.category || '').toLowerCase().includes(q)
-        if (!titleMatch && !locationMatch && !summaryMatch && !categoryMatch) {
+        const sectorMatch = (p.sector || p.category || '').toLowerCase().includes(q)
+        const beneMatch = (p.beneficiaries || '').toLowerCase().includes(q)
+        if (!titleMatch && !locationMatch && !summaryMatch && !sectorMatch && !beneMatch) {
           return false
         }
       }
@@ -330,12 +332,12 @@ export default function OurWork() {
                     const cardDesc = formatText(p.summary || p.description) || 'Empowering communities through field initiatives.'
                     const rawImg = p.image_url || p.image
                     const imgSrc = getImageUrl(rawImg) || '/about-banner.jpg'
-                    const targetLink = `/properties/${p.slug || p.id}`
+                    const targetLink = `/our-work/${p.slug || p.id}`
 
                     const isActive = p.is_active !== undefined ? (Boolean(p.is_active) && p.is_active !== '0' && p.is_active !== 0) : true
                     const projectPhase = (p.project_status || 'ongoing').toLowerCase()
-                    const sectorName = p.category || 'Initiative'
-                    const locationStr = p.location || 'Multiple Field Sites, India'
+                    const sectorName = p.sector || p.category || 'WASH'
+                    const locationStr = p.locations || p.location || 'Multiple Field Sites, India'
 
                     return (
                       <div
@@ -389,10 +391,18 @@ export default function OurWork() {
                         {/* Card Content */}
                         <div className="p-6 sm:p-7 flex flex-col justify-between flex-1 space-y-4">
                           <div className="space-y-2.5">
-                            {/* Location Tag */}
-                            <div className="flex items-center gap-1.5 text-xs font-semibold text-stone-500">
-                              <FaMapMarkerAlt className="text-red-500 shrink-0" />
-                              <span className="truncate">{locationStr}</span>
+                            {/* Location & Beneficiaries Tags */}
+                            <div className="flex flex-wrap items-center gap-2">
+                              <div className="flex items-center gap-1.5 text-xs font-semibold text-stone-500">
+                                <FaMapMarkerAlt className="text-red-500 shrink-0" />
+                                <span className="truncate">{locationStr}</span>
+                              </div>
+                              {p.beneficiaries && (
+                                <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 border border-emerald-100 px-2 py-0.5 text-[10px] font-bold text-emerald-700">
+                                  <FaUsers className="text-[9px]" />
+                                  <span>{p.beneficiaries}</span>
+                                </span>
+                              )}
                             </div>
 
                             {/* Title */}
