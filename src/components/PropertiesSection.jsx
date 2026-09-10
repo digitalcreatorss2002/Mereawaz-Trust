@@ -39,6 +39,10 @@ export default function PropertiesSection({
       ? `${categoryText} • ${locationText}`
       : categoryText || locationText || "Program";
 
+    // Active status & project phase
+    const isActive = p.is_active !== undefined ? (Boolean(p.is_active) && p.is_active !== "0" && p.is_active !== 0) : true;
+    const projectPhase = (p.project_status || 'ongoing').toLowerCase();
+
     return (
       <div
         key={p.id || p.slug || Math.random()}
@@ -65,12 +69,27 @@ export default function PropertiesSection({
         {/* 3. CARD CONTENT */}
         <div className="relative z-10 flex flex-col h-full justify-between">
           <div>
-            {/* Category / Location Badge */}
-            {badgeLabel && (
-              <div className="mb-4 sm:mb-6 inline-flex max-w-full items-center gap-2 rounded-full bg-[#F7D046] px-3.5 py-1.5 text-xs font-extrabold text-[#13382C] shadow-sm shrink-0 truncate">
-                <span className="truncate">{badgeLabel}</span>
-              </div>
-            )}
+            {/* Category / Location Badge & Active Indicator */}
+            <div className="mb-4 sm:mb-6 flex flex-wrap items-center gap-2">
+              {badgeLabel && (
+                <div className="inline-flex max-w-full items-center gap-2 rounded-full bg-[#F7D046] px-3.5 py-1.5 text-xs font-extrabold text-[#13382C] shadow-sm shrink-0 truncate">
+                  <span className="truncate">{badgeLabel}</span>
+                </div>
+              )}
+              {isActive ? (
+                <div className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/90 text-white px-3 py-1 text-[11px] font-black uppercase tracking-wider backdrop-blur shadow-sm">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-300 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+                  </span>
+                  <span>Active</span>
+                </div>
+              ) : (
+                <div className="inline-flex items-center gap-1.5 rounded-full bg-stone-600/80 text-white px-3 py-1 text-[11px] font-bold uppercase tracking-wider backdrop-blur shadow-sm">
+                  <span>{projectPhase === 'completed' ? 'Completed' : projectPhase === 'planned' ? 'Planned' : 'Inactive'}</span>
+                </div>
+              )}
+            </div>
 
             {/* Title (Mapped directly from DB) */}
             <h3 className="font-display text-lg sm:text-2xl font-black text-[#F7D046] group-hover:text-white transition-colors duration-300 mb-2 sm:mb-3 line-clamp-2 leading-snug">

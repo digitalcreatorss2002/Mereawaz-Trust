@@ -8,6 +8,8 @@ import Home from './pages/Home.jsx'
 import About from './pages/About.jsx'
 import Properties from './pages/Properties.jsx'
 import PropertyDetail from './pages/PropertyDetail.jsx'
+import OurWork from './pages/OurWork.jsx'
+import Publications from './pages/Publications.jsx'
 import Gallery from './pages/Gallery.jsx'
 import Blog from './pages/Blog.jsx'
 import BlogDetail from './pages/BlogDetail.jsx'
@@ -30,7 +32,10 @@ export default function App() {
           <Route path="/about" element={<About />} />
           <Route path="/properties" element={<Properties />} />
           <Route path="/properties/:slug" element={<PropertyDetail />} />
+          <Route path="/our-work" element={<OurWork />} />
+          <Route path="/publications" element={<Publications />} />
           <Route path="/gallery" element={<Gallery />} />
+          <Route path="/media-stories" element={<Gallery />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogDetail />} />
           <Route path="/contact" element={<Contact />} />

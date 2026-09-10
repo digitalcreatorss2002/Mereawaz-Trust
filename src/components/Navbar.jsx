@@ -8,7 +8,9 @@ const links = [
   { to: '/', label: 'Home' },
   { to: '/about', label: 'About Us' },
   { to: '/properties', label: 'Our Programs' },
-  { to: '/gallery', label: 'Gallery' },
+  { to: '/our-work', label: 'Our Work' },
+  { to: '/publications', label: 'Publications' },
+  { to: '/gallery', label: 'Media & Stories' },
   { to: '/blog', label: 'Blog & News' },
   { to: '/contact', label: 'Contact Us' },
 ]
@@ -49,7 +51,7 @@ export default function Navbar() {
   }, [open])
 
   const linkClass = ({ isActive }) =>
-    `relative text-sm font-semibold tracking-wide transition-all duration-300 py-1.5 px-3 rounded-full ${
+    `relative text-xs xl:text-sm font-semibold tracking-tight xl:tracking-wide transition-all duration-300 py-1.5 px-2.5 xl:px-3 rounded-full whitespace-nowrap ${
       isActive
         ? 'text-white bg-[var(--button-bg-color)] shadow-sm'
         : 'text-gray-800 hover:text-[var(--button-bg-color)] hover:bg-black/5'
@@ -130,7 +132,7 @@ export default function Navbar() {
           </NavLink>
 
           {/* DESKTOP NAV LINKS */}
-          <nav className="hidden items-center gap-2 md:flex lg:gap-3 bg-white/50 backdrop-blur px-4 py-1.5 rounded-full border border-black/5 shadow-inner">
+          <nav className="hidden items-center gap-1 xl:gap-2.5 lg:flex bg-white/50 backdrop-blur px-2.5 xl:px-4 py-1.5 rounded-full border border-black/5 shadow-inner">
             {links.map((l) => (
               <NavLink key={l.to} to={l.to} className={linkClass} end={l.to === '/'}>
                 {l.label}
@@ -139,10 +141,10 @@ export default function Navbar() {
           </nav>
 
           {/* RIGHT DONATE CTA BUTTON */}
-          <div className="hidden shrink-0 items-center md:flex">
+          <div className="hidden shrink-0 items-center lg:flex">
             <NavLink
               to="/donate"
-              className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-[var(--button-bg-color)] px-6 py-2.5 text-sm font-bold text-white shadow-md transition-all duration-300 hover:bg-[var(--button-hover-color)] hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0"
+              className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-[var(--button-bg-color)] px-5 xl:px-6 py-2.5 text-xs xl:text-sm font-bold text-white shadow-md transition-all duration-300 hover:bg-[var(--button-hover-color)] hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0"
             >
               <FaHeart className="text-pink-300 transition-transform duration-300 group-hover:scale-125 group-hover:text-red-300" />
               <span>Donate Now</span>
@@ -151,7 +153,7 @@ export default function Navbar() {
 
           {/* MOBILE HAMBURGER BUTTON */}
           <button
-            className="flex h-11 w-11 items-center justify-center rounded-xl bg-white text-gray-900 shadow-sm border border-black/5 md:hidden active:scale-95 transition-transform"
+            className="flex h-11 w-11 items-center justify-center rounded-xl bg-white text-gray-900 shadow-sm border border-black/5 lg:hidden active:scale-95 transition-transform"
             onClick={() => setOpen(!open)}
             aria-label="Toggle Navigation Menu"
           >
@@ -168,7 +170,7 @@ export default function Navbar() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.35, ease: 'easeInOut' }}
-            className="overflow-hidden bg-white border-b border-gray-200 shadow-aasha-lg md:hidden"
+            className="overflow-hidden bg-white border-b border-gray-200 shadow-aasha-lg lg:hidden"
           >
             <div className="container-page py-6 flex flex-col items-center gap-4">
               {links.map((l) => (

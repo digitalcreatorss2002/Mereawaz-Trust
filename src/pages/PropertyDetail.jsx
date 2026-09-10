@@ -81,11 +81,31 @@ export default function PropertyDetail() {
           </button>
         </div>
 
-        {item.category && (
-          <span className="inline-block rounded-full bg-[var(--secondary-light)] px-4 py-1 text-xs font-bold uppercase tracking-widest text-[var(--button-bg-color)] mb-3">
-            {item.category}
-          </span>
-        )}
+        <div className="flex flex-wrap items-center gap-2 mb-4">
+          {item.category && (
+            <span className="inline-block rounded-full bg-[var(--secondary-light)] px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-[var(--button-bg-color)]">
+              {item.category}
+            </span>
+          )}
+          {item.is_active !== false && item.is_active !== 0 ? (
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-600 px-3.5 py-1 text-xs font-black uppercase tracking-wider text-white shadow-sm">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-300 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+              </span>
+              <span>Active Program</span>
+            </span>
+          ) : (
+            <span className="inline-flex items-center gap-1 rounded-full bg-stone-600 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-white">
+              <span>{item.project_status === 'completed' ? 'Completed' : item.project_status === 'planned' ? 'Planned' : 'Inactive'}</span>
+            </span>
+          )}
+          {item.project_status && (
+            <span className="inline-block rounded-full bg-amber-50 text-amber-900 border border-amber-200 px-3 py-1 text-xs font-bold capitalize">
+              {item.project_status} Phase
+            </span>
+          )}
+        </div>
 
         <h1 className="font-display text-3xl font-extrabold sm:text-5xl text-gray-900 leading-tight mb-2">
           {item.title}
