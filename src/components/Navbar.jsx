@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaHeart, FaFacebookF, FaInstagram, FaWhatsapp, FaYoutube } from 'react-icons/fa'
+import { FaXTwitter } from 'react-icons/fa6'
 import { HiMenuAlt3, HiX } from 'react-icons/hi'
 
 const links = [
@@ -93,6 +94,9 @@ export default function Navbar() {
             </a>
             <a href="https://www.instagram.com/mat_meriawaztrust/" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--primary-color)] transition-transform hover:scale-110 text-sm" aria-label="Instagram">
               <FaInstagram />
+            </a>
+            <a href="https://x.com/MeriAwazT" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--primary-color)] transition-transform hover:scale-110 text-sm" aria-label="X (Twitter)">
+              <FaXTwitter />
             </a>
             <a href="https://wa.me/918800902890" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--primary-color)] transition-transform hover:scale-110 text-sm" aria-label="WhatsApp">
               <FaWhatsapp />
@@ -202,6 +206,9 @@ export default function Navbar() {
                   </a>
                   <a href="https://www.instagram.com/mat_meriawaztrust/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                     <FaInstagram className="h-5 w-5 hover:text-[var(--button-bg-color)]" />
+                  </a>
+                  <a href="https://x.com/MeriAwazT" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+                    <FaXTwitter className="h-5 w-5 hover:text-[var(--button-bg-color)]" />
                   </a>
                   <a href="https://wa.me/918800902890" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
                     <FaWhatsapp className="h-5 w-5 hover:text-[var(--button-bg-color)]" />

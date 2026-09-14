@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaHeart, FaFacebookF, FaInstagram, FaWhatsapp, FaYoutube, FaArrowRight } from 'react-icons/fa'
+import { FaXTwitter } from 'react-icons/fa6'
 import { api } from '../api.js'
 
 export default function Footer() {
@@ -87,6 +88,9 @@ export default function Footer() {
               <a href="https://www.instagram.com/mat_meriawaztrust/" target="_blank" rel="noopener noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--accent-gold)] text-[var(--text-color)] transition-all hover:bg-[var(--text-color-light)] hover:scale-110" aria-label="Instagram">
                 <FaInstagram />
               </a>
+              <a href="https://x.com/MeriAwazT" target="_blank" rel="noopener noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--accent-gold)] text-[var(--text-color)] transition-all hover:bg-[var(--text-color-light)] hover:scale-110" aria-label="X (Twitter)">
+                <FaXTwitter />
+              </a>
               <a href="https://wa.me/918800902890" target="_blank" rel="noopener noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--accent-gold)] text-[var(--text-color)] transition-all hover:bg-[var(--text-color-light)] hover:scale-110" aria-label="WhatsApp">
                 <FaWhatsapp />
               </a>
@@ -114,13 +118,23 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link to="/our-work" className="hover:text-[var(--primary-color)] transition-colors flex items-center gap-2">
+                  <FaArrowRight className="text-[10px] text-[var(--text-color-light)]" /> Our Work
+                </Link>
+              </li>
+              <li>
                 <Link to="/properties" className="hover:text-[var(--primary-color)] transition-colors flex items-center gap-2">
                   <FaArrowRight className="text-[10px] text-[var(--text-color-light)]" /> Our Programs
                 </Link>
               </li>
               <li>
+                <Link to="/publications" className="hover:text-[var(--primary-color)] transition-colors flex items-center gap-2">
+                  <FaArrowRight className="text-[10px] text-[var(--text-color-light)]" /> Publications
+                </Link>
+              </li>
+              <li>
                 <Link to="/gallery" className="hover:text-[var(--primary-color)] transition-colors flex items-center gap-2">
-                  <FaArrowRight className="text-[10px] text-[var(--text-color-light)]" /> Gallery
+                  <FaArrowRight className="text-[10px] text-[var(--text-color-light)]" /> Media &amp; Stories
                 </Link>
               </li>
               <li>
